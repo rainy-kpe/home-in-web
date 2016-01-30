@@ -6,6 +6,7 @@ import tslint from "gulp-tslint";
 import jade from "gulp-jade";
 import less from "gulp-less";
 import changed from "gulp-changed";
+import rename from "gulp-rename";
 import runSequence from "gulp-run-sequence";
 
 const tsProject = ts.createProject('tsconfig.json');
@@ -32,15 +33,17 @@ gulp.task('backend-ts', () =>
 
 gulp.task('frontend-ts', () =>
   gulp.src(["frontend/**/*.ts"])
-    .pipe(changed('output/frontend'))
+    .pipe(changed('output/frontend/js'))
     .pipe(ts(tsProject))
-    .pipe(gulp.dest('output/frontend'))
+    .pipe(rename({dirname: ''}))
+    .pipe(gulp.dest('output/frontend/js'))
 );
 
 gulp.task('jade', () =>
-  gulp.src('frontend/templates/*.jade')
+  gulp.src(['frontend/templates/*.jade', 'frontend/components/**/*.jade'])
     .pipe(changed('output/frontend'))
     .pipe(jade())
+    .pipe(rename({dirname: ''}))
     .pipe(gulp.dest('output/frontend'))
 );
 
