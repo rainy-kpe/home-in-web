@@ -1,0 +1,14 @@
+link(rel="import" href="bower_components/polymer/polymer.html")
+link(rel="import" href="bower_components/google-feeds/google-feeds.html")
+
+dom-module#hiw-wallpaper-carousel
+  link(rel="import" type="css" href="css/hiw-wallpaper-carousel.css")
+  template
+    google-feeds(feed='[[sourceFeed]]' results='{{feed}}')
+    p Feed title:
+      span {{feed.title}}
+
+    div#bg
+      img(src$="[[imgUrl]]")
+
+script(type="text/javascript" src="js/hiw-wallpaper-carousel.js")

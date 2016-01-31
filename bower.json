@@ -2,7 +2,8 @@
   "name": "home-in-web",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
-    "polymer-ts": "^0.1.22"
+    "polymer-ts": "^0.1.22",
+    "google-feeds": "^1.0.2"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
