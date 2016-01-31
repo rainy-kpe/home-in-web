@@ -1,11 +1,9 @@
 /// <reference path="../../../typings/browser.d.ts" />
 
-Polymer({
-    is: "hello-world",
-    properties: {
-        who: {
-            type: String,
-            value: "World"
-        }
-    }
-});
+@component("hello-world")
+class HelloWorld extends polymer.Base {
+    @property({type: String, value: "World"})
+    who: String;
+}
+
+HelloWorld.register();
