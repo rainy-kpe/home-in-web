@@ -11,8 +11,8 @@
  * @property {String} source The image source: "thepaperwall", "bing"
  * @property {String} sourceFeed The source feed url
  */
-@component("hiw-wallpaper-carousel")
-class HiwWallpaperCarousel extends polymer.Base {
+@component("rf-wallpaper-carousel")
+class RFWallpaperCarousel extends polymer.Base {
 
     @property({type: Object})
     feed: any;
@@ -79,4 +79,4 @@ class HiwWallpaperCarousel extends polymer.Base {
     }
 }
 
-HiwWallpaperCarousel.register();
+RFWallpaperCarousel.register();
