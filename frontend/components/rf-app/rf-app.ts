@@ -1,4 +1,5 @@
 /// <reference path="../../../typings/browser.d.ts" />
+"use strict";
 
 /**
  * Rainfeeds App web component
@@ -7,12 +8,12 @@
  */
 @component("rf-app")
 class RFApp extends polymer.Base {
-    @property({type: String, value: "bing"})
-    wallpaperSource: String;
+    @property({type: String})
+    source: String;
 
     attached(): void {
         this.$.settingsButton.addEventListener("tap", () => {
-            this.$.settingsDialog.open();
+            this.$.settingsDialog.toggle();
         });
     }
 }

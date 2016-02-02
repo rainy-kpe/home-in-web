@@ -2,28 +2,18 @@ link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/paper-toolbar/paper-toolbar.html")
 link(rel="import" href="bower_components/paper-icon-button/paper-icon-button.html")
 link(rel="import" href="bower_components/iron-icons/iron-icons.html")
-link(rel="import" href="bower_components/paper-dialog/paper-dialog.html")
-link(rel="import" href="bower_components/paper-button/paper-button.html")
-link(rel="import" href="bower_components/paper-radio-group/paper-radio-group.html")
-link(rel="import" href="bower_components/paper-radio-button/paper-radio-button.html")
 link(rel="import" href="rf-wallpaper-carousel.html")
+link(rel="import" href="rf-settings-dialog.html")
 
 dom-module#rf-app
   link(rel="import" type="css" href="css/rf-app.css")
   template
-    rf-wallpaper-carousel(source="[[wallpaperSource]]")
+    rf-wallpaper-carousel(source="[[source]]")
 
     paper-toolbar
       div.title Rainfeeds
       paper-icon-button#settingsButton(icon="icons:settings")
 
-    paper-dialog#settingsDialog
-      h2 Settings
-      p Select the wallpaper source:
-        br
-        paper-radio-group(selected="{{wallpaperSource}}")
-          paper-radio-button(name="bing") Bing
-          br
-          paper-radio-button(name="thepaperwall") The Paper Wall
+    rf-settings-dialog#settingsDialog(source="{{source}}")
 
 script(type="text/javascript" src="js/rf-app.js")

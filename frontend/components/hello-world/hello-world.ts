@@ -1,4 +1,5 @@
 /// <reference path="../../../typings/browser.d.ts" />
+"use strict";
 
 /**
  * Hello World web component
