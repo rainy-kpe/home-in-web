@@ -1,10 +1,11 @@
 {
-  "name": "home-in-web",
+  "name": "rainfeeds",
   "version": "1.0.0",
   "description": "Web browser home page",
   "main": "backend/app.js",
   "scripts": {
-    "start": "node output/backend/app.js"
+    "start": "node output/backend/app.js",
+    "postinstall" : "bower install"
   },
   "repository": {
     "type": "git",

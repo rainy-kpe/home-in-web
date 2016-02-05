@@ -1,16 +1,13 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/paper-card/paper-card.html")
-link(rel="import" href="bower_components/paper-button/paper-button.html")
+link(rel="import" href="rf-card.html")
 
 dom-module#rf-card-area
   link(rel="import" type="css" href="css/rf-card-area.css")
   template
 
-    div.module-card-wrap
-      template(is="dom-repeat" items="[[cards]]" as="card")
-        paper-card.module-card(heading="Card Title")
-          div.card-content Some content [[card]]
-          div.card-actions
-            paper-button Some action
+    div.items
+      template(is="dom-repeat" items="[[feeds]]" as="feed")
+        rf-card.item(feed="[[feed]]")
 
 script(type="text/javascript" src="js/rf-card-area.js")

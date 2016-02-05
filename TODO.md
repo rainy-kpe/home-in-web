@@ -12,3 +12,9 @@
     * http://wallpaperswide.com/rss/latest_wallpapers
     * https://interfacelift.com/wallpaper/rss/
 
+
+* Show date in feed
+* Show site icon
+* Randomize title background color
+* Update periodically
+* Highlight new items
