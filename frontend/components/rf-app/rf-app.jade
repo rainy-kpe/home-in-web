@@ -4,6 +4,7 @@ link(rel="import" href="bower_components/paper-icon-button/paper-icon-button.htm
 link(rel="import" href="bower_components/iron-icons/iron-icons.html")
 link(rel="import" href="rf-wallpaper-carousel.html")
 link(rel="import" href="rf-settings-dialog.html")
+link(rel="import" href="rf-card-area.html")
 
 dom-module#rf-app
   link(rel="import" type="css" href="css/rf-app.css")
@@ -13,6 +14,8 @@ dom-module#rf-app
     paper-toolbar
       div.title Rainfeeds
       paper-icon-button#settingsButton(icon="icons:settings")
+
+    rf-card-area
 
     rf-settings-dialog#settingsDialog(source="{{source}}")
 

@@ -8,9 +8,6 @@
  */
 @component("rf-app")
 class RFApp extends polymer.Base {
-    @property({type: String})
-    source: String;
-
     attached(): void {
         this.$.settingsButton.addEventListener("tap", () => {
             this.$.settingsDialog.toggle();

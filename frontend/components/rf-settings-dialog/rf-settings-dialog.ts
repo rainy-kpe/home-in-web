@@ -11,8 +11,8 @@
 @component("rf-settings-dialog")
 class RFSettingsDialog extends polymer.Base {
 
-    @property({type: Object, value: "bing", notify: true})
-    source: Object;
+    @property({type: String, value: "bing", notify: true})
+    source: String;
 
     toggle: any = () => {
         this.$.dialog.toggle();
