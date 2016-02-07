@@ -5,7 +5,7 @@ link(rel="import" href="rf-rss-feed.html")
 dom-module#rf-card
   link(rel="import" type="css" href="css/rf-card.css")
   template
-    paper-card(heading="[[title]]")
+    paper-card(heading="[[title]]" style$='background-color: rgba([[_generateColor(feed)]], 0.5);')
       div.card-content
         rf-rss-feed(title="{{title}}" feed="[[feed]]")
 

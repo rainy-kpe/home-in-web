@@ -3,7 +3,6 @@
     "align": [
       true,
       "parameters",
-      "arguments",
       "statements"
     ],
     "ban": false,
@@ -37,7 +36,7 @@
     ],
     "no-any": false,
     "no-arg": true,
-    "no-bitwise": true,
+    "no-bitwise": false,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": false,
     "no-console": [
@@ -83,7 +82,7 @@
     ],
     "radix": true,
     "semicolon": true,
-    "switch-default": true,
+    "switch-default": false,
     "trailing-comma": [
       false,
       {

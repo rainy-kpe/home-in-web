@@ -12,6 +12,7 @@ dom-module#rf-rss-feed
         template(is="dom-repeat" items="[[result.entries]]" as="entry")
           li
             a(target="_blank" href="[[entry.link]]") [[entry.title]]
+            span.time [[_formatDate(entry.publishedDate)]]
             paper-tooltip [[entry.content]]
 
 script(type="text/javascript" src="js/rf-rss-feed.js")

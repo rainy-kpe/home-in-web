@@ -26,6 +26,11 @@ class RFRssFeed extends polymer.Base {
             this.title = newVal.title;
         }
     }
+
+    _formatDate(date: string): string {
+        const d: Date = new Date(date);
+        return moment.duration(moment(d).diff(moment())).humanize();
+    }
 }
 
 RFRssFeed.register();

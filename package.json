@@ -5,7 +5,7 @@
   "main": "backend/app.js",
   "scripts": {
     "start": "node output/backend/app.js",
-    "postinstall" : "bower install"
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
