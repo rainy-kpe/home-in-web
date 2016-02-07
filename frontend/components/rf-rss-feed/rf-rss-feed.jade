@@ -1,18 +1,16 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/google-feeds/google-feeds.html")
-link(rel="import" href="bower_components/paper-tooltip/paper-tooltip.html")
+link(rel="import" href="rf-rss-item.html")
 
 dom-module#rf-rss-feed
   link(rel="import" type="css" href="css/rf-rss-feed.css")
   template
-    google-feeds(feed='[[feed]]' results='{{result}}')
+    google-feeds#feed(feed='[[feed]]' results='{{result}}')
 
     div.item-list
       ul
         template(is="dom-repeat" items="[[result.entries]]" as="entry")
           li
-            a(target="_blank" href="[[entry.link]]") [[entry.title]]
-            span.time [[_formatDate(entry.publishedDate)]]
-            paper-tooltip [[entry.content]]
+            rf-rss-item(entry="[[entry]]")
 
 script(type="text/javascript" src="js/rf-rss-feed.js")

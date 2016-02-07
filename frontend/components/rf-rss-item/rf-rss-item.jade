@@ -1,0 +1,17 @@
+link(rel="import" href="bower_components/polymer/polymer.html")
+link(rel="import" href="bower_components/paper-tooltip/paper-tooltip.html")
+
+dom-module#rf-rss-item
+  link(rel="import" type="css" href="css/rf-rss-item.css")
+  template
+    div.container
+      div.thumb(hidden$="[[!image]]")
+        a(target="_blank" href="[[link]]")
+          img(src="[[image]]")
+      div.text
+        a(target="_blank" href="[[entry.link]]") [[entry.title]]
+        span.time [[_formatDate(entry.publishedDate)]]
+        div.snippet [[_formatSnippet(entry.contentSnippet)]]
+          paper-tooltip [[entry.content]]
+
+script(type="text/javascript" src="js/rf-rss-item.js")

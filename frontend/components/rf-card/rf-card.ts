@@ -35,7 +35,7 @@ class RFCard extends polymer.Base {
             return a & a;
         }, 0);
 
-        const [r, g, b]: number[] = this._HSVtoRGB((Math.abs(val) % 1000) / 1000, 1, 1);
+        const [r, g, b]: number[] = this._HSVtoRGB((Math.abs(val) % 1000) / 1000, 1, 0.5);
         return `${r}, ${g}, ${b}`;
     }
 }

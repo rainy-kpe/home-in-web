@@ -13,6 +13,8 @@ class RFCardArea extends polymer.Base {
 
     attached(): void {
         this.set("feeds", [
+            "http://www.reddit.com/.rss",
+            "https://news.ycombinator.com/rss",
             "http://www.rainlendar.net/cms/index.php?option=com_kunena&Itemid=42&func=fb_rss&no_html=1",
             "http://www.tivi.fi/rss.xml",
             "http://www.aamulehti.fi/cs/Satellite?c=AMChannelFeed_C&cid=1194596264225&p=1194596117294&" +

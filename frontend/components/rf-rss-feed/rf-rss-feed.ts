@@ -18,18 +18,16 @@ class RFRssFeed extends polymer.Base {
     title: any;
 
     /**
-     * Observer for the feed changes. Parses the content.
+     * Observer for the feed changes.
      */
     @observe("result")
     _resultChanged(newVal: any, oldVal: any): void {
         if (newVal) {
             this.title = newVal.title;
-        }
-    }
 
-    _formatDate(date: string): string {
-        const d: Date = new Date(date);
-        return moment.duration(moment(d).diff(moment())).humanize();
+            // Update feed every 15 minutes
+            this.async(() => this.$.feed._fetchFeeds(), 15 * 60 * 1000);
+        }
     }
 }
 
