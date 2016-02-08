@@ -10,12 +10,8 @@
     * http://wallpaperswide.com/rss/latest_wallpapers
     * https://interfacelift.com/wallpaper/rss/
 * Show site icon
-* Highlight new items
-* Blur the background image
-* Button to show the image and remove the blur
 
 # Bugs
-* Background image moves on tablet
 
 # Card types
 * Notes

@@ -5,7 +5,6 @@ dom-module#rf-wallpaper-carousel
   link(rel="import" type="css" href="css/rf-wallpaper-carousel.css")
   template
     google-feeds(feed='[[sourceFeed]]' results='{{feed}}')
-    div#bg
-      img(src$="[[imgUrl]]")
+    div#bg(style$="background: url([[imgUrl]]) no-repeat center center fixed;" class$="[[_getClass(blurImage)]]")
 
 script(type="text/javascript" src="js/rf-wallpaper-carousel.js")

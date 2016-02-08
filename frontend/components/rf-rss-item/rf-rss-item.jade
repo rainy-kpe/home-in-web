@@ -9,7 +9,7 @@ dom-module#rf-rss-item
         a(target="_blank" href="[[link]]")
           img(src="[[image]]")
       div.text
-        a(target="_blank" href="[[entry.link]]") [[entry.title]]
+        a(class$="[[entry.status]]" target="_blank" href="[[entry.link]]") [[entry.title]]
         span.time [[_formatDate(entry.publishedDate)]]
         div.snippet [[_formatSnippet(entry.contentSnippet)]]
           paper-tooltip [[entry.content]]

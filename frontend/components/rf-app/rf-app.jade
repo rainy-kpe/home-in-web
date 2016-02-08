@@ -9,13 +9,14 @@ link(rel="import" href="rf-card-area.html")
 dom-module#rf-app
   link(rel="import" type="css" href="css/rf-app.css")
   template
-    rf-wallpaper-carousel(source="[[source]]")
+    rf-wallpaper-carousel(source="[[source]]" blur-image="[[!showBackground]]")
 
     paper-toolbar
       div.title Rainfeeds
+      paper-icon-button#bgButton(icon="icons:dashboard")
       paper-icon-button#settingsButton(icon="icons:settings")
 
-    rf-card-area
+    rf-card-area(hidden$="[[showBackground]]")
 
     rf-settings-dialog#settingsDialog(source="{{source}}")
 

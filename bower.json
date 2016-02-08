@@ -1,5 +1,5 @@
 {
-  "name": "home-in-web",
+  "name": "rainfeeds",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.0.0",
     "polymer-ts": "^0.1.22",

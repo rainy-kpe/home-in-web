@@ -18,11 +18,11 @@
   },
   "homepage": "https://github.com/rainy-kpe/home-in-web#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
   },
   "devDependencies": {
-    "babel-core": "^6.4.5",
-    "babel-preset-es2015": "^6.3.13",
+    "babel-core": "^6.5.1",
+    "babel-preset-es2015": "^6.5.0",
     "gulp": "^3.9.0",
     "gulp-changed": "^1.3.0",
     "gulp-debug": "^2.1.2",
@@ -35,7 +35,7 @@
     "jade": "^1.11.0",
     "less": "^2.6.0",
     "tslint": "^3.3.0",
-    "typescript": "^1.7.5",
-    "typings": "^0.6.3"
+    "typescript": "^1.8.0",
+    "typings": "^0.6.6"
   }
 }

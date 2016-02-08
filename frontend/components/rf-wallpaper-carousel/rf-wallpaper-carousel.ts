@@ -26,6 +26,13 @@ class RFWallpaperCarousel extends polymer.Base {
     @property({type: String, computed: "_computeSourceFeed(source)"})
     sourceFeed: String;
 
+    @property({type: Object, value: true})
+    blurImage: boolean;
+
+    _getClass(blur: boolean): string {
+        return blur ? "blur" : "";
+    }
+
     /**
      * Returns the sourceFeed for the given source
      */
