@@ -15,4 +15,4 @@ apt-get install -y nodejs
 
 ln -s /usr/bin/nodejs /usr/bin/node
 
-npm install -g gulp bower typings
+npm install -g gulp bower typings firebase-tools

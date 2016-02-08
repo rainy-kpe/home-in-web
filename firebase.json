@@ -1,0 +1,9 @@
+{
+  "firebase": "sweltering-fire-9601",
+  "public": "output/frontend",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

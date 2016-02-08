@@ -11,8 +11,13 @@
     * https://interfacelift.com/wallpaper/rss/
 * Show site icon
 * Highlight new items
+* Blur the background image
+* Button to show the image and remove the blur
 
-# Card types:
+# Bugs
+* Background image moves on tablet
+
+# Card types
 * Notes
 * Combined feeds
 * Weather
