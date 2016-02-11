@@ -8,8 +8,8 @@
 @component("rf-card")
 class RFCard extends polymer.Base {
 
-    @property({type: String})
-    feed: String;
+    @property({type: Object})
+    feed: any;
 
     _HSVtoRGB(h: number, s: number, v: number): any {
         let r: number, g: number, b: number, i: number, f: number, p: number, q: number, t: number;

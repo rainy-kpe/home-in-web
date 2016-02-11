@@ -8,35 +8,39 @@
 @component("rf-rss-feed")
 class RFRssFeed extends polymer.Base {
 
-    @property({type: String})
-    feed: Object;
-
     @property({type: Object})
-    result: any;
+    feed: any;
 
-    @property({type: Object, notify: true})
-    title: any;
+    @property({type: Array})
+    entries: any;
 
-    old: Set<string> = new Set<string>();
+    attached(): void {
+        this.async(() => {
+            const feeds: any[] = <any> Polymer.dom(this.root).querySelectorAll(".feed");
 
-    /**
-     * Observer for the feed changes.
-     */
-    @observe("result")
-    _resultChanged(newVal: any, oldVal: any): void {
-        if (newVal) {
-            this.title = newVal.title;
+            feeds.map((feed: any) => feed.addEventListener("google-feeds-response", (e: any) => {
 
-            if (this.old.size > 0) {
-                newVal.entries.map((e: any) => {
-                    e.status = this.old.has(e.title) ? "" : "new";
-                });
-            }
-            this.old.clear();
+                if (this.feed.urls.length === 1) {
+                    this.set("entries", feed.results.entries);
 
-            // Update feed every 15 minutes
-            this.async(() => this.$.feed._fetchFeeds(), 15 * 60 * 1000);
-        }
+                    // Update feed every 15 minutes
+                    this.async(() => feed._fetchFeeds(), 15 * 60 * 1000);
+                } else {
+                    // Merge feeds
+                    const all: any[] = _.uniqBy((this.entries || []).concat(feed.results.entries), (v: any) => v.title)
+                        .sort((a: any, b: any) => {
+                            const dtA: Date = new Date(a.publishedDate);
+                            const dtB: Date = new Date(b.publishedDate);
+                            return dtB.getTime() - dtA.getTime();
+                        });
+
+                    this.set("entries", _.take(all, 20));
+
+                    // Update feeds every 60 minutes
+                    this.async(() => feed._fetchFeeds(), 60 * 60 * 1000);
+                }
+            }));
+        });
     }
 }
 

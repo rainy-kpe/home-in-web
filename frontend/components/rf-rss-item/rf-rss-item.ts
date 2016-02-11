@@ -23,6 +23,8 @@ class RFRssItem extends polymer.Base {
             const imgUrl: string[] = newVal.content.match(/src=\"(http:\/\/.+?.jpg)/);
             if (imgUrl && imgUrl.length > 1) {
                 this.set("image", imgUrl[1]);
+            } else {
+                this.set("image", "");
             }
             const link: string[] = newVal.content.match(/<span><a href=\"(.+?)\">\[link\]<\/a><\/span>/);
             if (link && link.length > 1) {
@@ -33,7 +35,11 @@ class RFRssItem extends polymer.Base {
 
     _formatDate(date: string): string {
         const d: Date = new Date(date);
-        return moment.duration(moment(d).diff(moment())).humanize();
+        const diff: number = moment(d).diff(moment());
+
+        this.set("entry.status", Math.abs(diff) < 60 * 60 * 1000 ? "new" : "");
+
+        return moment.duration(diff).humanize();
     }
 
     _formatSnippet(snippet: string): string {

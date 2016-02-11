@@ -5,11 +5,13 @@ link(rel="import" href="rf-rss-item.html")
 dom-module#rf-rss-feed
   link(rel="import" type="css" href="css/rf-rss-feed.css")
   template
-    google-feeds#feed(feed='[[feed]]' results='{{result}}')
+
+    template(is="dom-repeat" items="[[feed.urls]]" as="url")
+      google-feeds.feed(feed='[[url]]')
 
     div.item-list
       ul
-        template(is="dom-repeat" items="[[result.entries]]" as="entry")
+        template(is="dom-repeat" items="[[entries]]" as="entry")
           li
             rf-rss-item(entry="[[entry]]")
 

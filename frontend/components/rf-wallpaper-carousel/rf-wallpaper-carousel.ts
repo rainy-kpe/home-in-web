@@ -58,6 +58,9 @@ class RFWallpaperCarousel extends polymer.Base {
             } else if (this.source === "bing") {
                 this._parseBing(newVal.entries[0].content);
             }
+
+            // Update feed every 2 hours
+            this.async(() => this.$.feed._fetchFeeds(), 2 * 60 * 60 * 1000);
         }
     }
 
