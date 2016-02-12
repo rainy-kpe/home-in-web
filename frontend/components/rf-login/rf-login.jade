@@ -1,0 +1,20 @@
+link(rel="import" href="bower_components/polymer/polymer.html")
+link(rel="import" href="bower_components/paper-icon-button/paper-icon-button.html")
+link(rel="import" href="bower_components/iron-icons/iron-icons.html")
+link(rel="import" href="bower_components/paper-dialog/paper-dialog.html")
+link(rel="import" href="bower_components/paper-button/paper-button.html")
+
+dom-module#rf-login
+  link(rel="import" type="css" href="css/rf-login.css")
+  template
+    paper-icon-button#button(icon="icons:account-circle")
+    span [[auth.google.displayName]]
+
+    paper-dialog#confirmation
+      h2 Logout
+      p Are you sure you want to log out from Rainfeeds?
+      div.buttons
+        paper-button(dialog-dismiss) No
+        paper-button#confirmButton(dialog-confirm) Yes
+
+script(type="text/javascript" src="js/rf-login.js")

@@ -1,4 +1,5 @@
 /// <reference path="main/ambient/express/express.d.ts" />
+/// <reference path="main/ambient/firebase/firebase.d.ts" />
 /// <reference path="main/ambient/lodash/lodash.d.ts" />
 /// <reference path="main/ambient/mime/mime.d.ts" />
 /// <reference path="main/ambient/moment-node/moment-node.d.ts" />

@@ -14,9 +14,16 @@ class RFRssFeed extends polymer.Base {
     @property({type: Array})
     entries: any;
 
+    @property({type: String})
+    error: string;
+
     attached(): void {
         this.async(() => {
             const feeds: any[] = <any> Polymer.dom(this.root).querySelectorAll(".feed");
+
+            feeds.map((feed: any) => feed.addEventListener("google-feeds-error", (e: any) => {
+                console.log("ERROR: " + e.status);
+            }));
 
             feeds.map((feed: any) => feed.addEventListener("google-feeds-response", (e: any) => {
 

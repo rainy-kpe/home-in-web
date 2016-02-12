@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/rainy-kpe/home-in-web#readme",
   "dependencies": {
-    "express": "^4.13.4",
+    "express": "^4.13.4"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",

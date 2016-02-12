@@ -6,6 +6,7 @@ link(rel="import" href="bower_components/iron-icons/iron-icons.html")
 link(rel="import" href="rf-wallpaper-carousel.html")
 link(rel="import" href="rf-settings-dialog.html")
 link(rel="import" href="rf-card-area.html")
+link(rel="import" href="rf-login.html")
 
 dom-module#rf-app
   link(rel="import" type="css" href="css/rf-app.css")
@@ -15,6 +16,7 @@ dom-module#rf-app
     paper-scroll-header-panel(fixed)
       paper-toolbar
         div.title Rainfeeds
+        rf-login
         paper-icon-button#bgButton(icon="icons:dashboard")
         paper-icon-button#settingsButton(icon="icons:settings")
 
