@@ -9,13 +9,24 @@
 class RFRssItem extends polymer.Base {
 
     @property({type: Object})
-    entry: Object;
+    entry: any;
 
     @property({type: String, value: ""})
     image: String;
 
     @property({type: String, value: ""})
     link: String;
+
+    @property({type: Object})
+    auth: any;
+
+    attached(): void {
+        this.$.star.addEventListener("tap", () => {
+            const star: boolean = !this.entry.starred;
+            this.set("entry.starred", star);
+            this.fire("star-changed", this.entry);
+        });
+    }
 
     @observe("entry")
     _entryChanged(newVal: any, oldVal: any): void {
@@ -31,6 +42,10 @@ class RFRssItem extends polymer.Base {
                 this.set("link", link[1]);
             }
         }
+    }
+
+    _getStarClass(starred: boolean): string {
+        return starred ? "starred" : "star";
     }
 
     _formatDate(date: string): string {

@@ -3,15 +3,16 @@
 * index metadata from polymer starter kit
 * "css" -> "styles"
 * Carousel: Update periodically (don't change the image if it's not changed)
-* Carousel: Error handling
 * Carousel: Select theme for source (if supported)
 * Feeds: error handling
 * Show site icon
-* add favicon
+* Add favicon
+* Add new feeds from the website
+* Store selected feeds to database
+* Show only starred items (toggle button)
 
 # Bugs
 
 # Card types
 * Notes
-* Combined feeds
 * Weather
