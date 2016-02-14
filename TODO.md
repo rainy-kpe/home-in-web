@@ -9,8 +9,7 @@
 * Add favicon
 * Add new feeds from the website
 * Store selected feeds to database
-* Show only starred items (toggle button)
-* Vulcanize for production
+* Don't deploy the bower_components when minimizing
 
 # Bugs
 

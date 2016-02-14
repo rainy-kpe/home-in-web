@@ -3,8 +3,9 @@ link(rel="import" href="bower_components/google-feeds/google-feeds.html")
 link(rel="import" href="rf-rss-item.html")
 
 dom-module#rf-rss-feed
-  link(rel="import" type="css" href="css/rf-rss-feed.css")
   template
+    style
+      include ../../../output/frontend/css/rf-rss-feed.css
 
     template(is="dom-repeat" items="[[feed.urls]]" as="url")
       google-feeds.feed(feed='[[url]]')

@@ -3,8 +3,9 @@ link(rel="import" href="bower_components/paper-card/paper-card.html")
 link(rel="import" href="rf-card.html")
 
 dom-module#rf-card-area
-  link(rel="import" type="css" href="css/rf-card-area.css")
   template
+    style
+      include ../../../output/frontend/css/rf-card-area.css
 
     div.items
       template(is="dom-repeat" items="[[feeds]]" as="feed")

@@ -2,8 +2,10 @@ link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/google-feeds/google-feeds.html")
 
 dom-module#rf-wallpaper-carousel
-  link(rel="import" type="css" href="css/rf-wallpaper-carousel.css")
   template
+    style
+      include ../../../output/frontend/css/rf-wallpaper-carousel.css
+
     google-feeds#feed(feed='[[sourceFeed]]' results='{{feed}}')
     div#bg(style$="background: url([[imgUrl]]) no-repeat center center fixed;" class$="[[_getClass(blurImage)]]")
 

@@ -9,8 +9,9 @@ link(rel="import" href="rf-card-area.html")
 link(rel="import" href="rf-login.html")
 
 dom-module#rf-app
-  link(rel="import" type="css" href="css/rf-app.css")
   template
+    style
+      include ../../../output/frontend/css/rf-app.css
     rf-wallpaper-carousel(source="[[source]]" blur-image="[[!showBackground]]")
 
     paper-scroll-header-panel(fixed)

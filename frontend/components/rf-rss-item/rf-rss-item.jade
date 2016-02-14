@@ -2,8 +2,10 @@ link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/paper-tooltip/paper-tooltip.html")
 
 dom-module#rf-rss-item
-  link(rel="import" type="css" href="css/rf-rss-item.css")
   template
+    style
+      include ../../../output/frontend/css/rf-rss-item.css
+
     div.container
       div(class$="[[_getStarClass(entry.starred)]]")
         paper-icon-button#star(icon="icons:star" hidden$="[[!auth]]")

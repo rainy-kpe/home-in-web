@@ -3,8 +3,9 @@ link(rel="import" href="bower_components/paper-header-panel/paper-header-panel.h
 link(rel="import" href="rf-rss-feed.html")
 
 dom-module#rf-card
-  link(rel="import" type="css" href="css/rf-card.css")
   template
+    style
+      include ../../../output/frontend/css/rf-card.css
     div(style$="background-color: rgba([[_generateColor(feed.title)]], 0.5)")
       paper-header-panel
         div.paper-header

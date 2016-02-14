@@ -9,6 +9,9 @@ import changed from "gulp-changed";
 import rename from "gulp-rename";
 import runSequence from "gulp-run-sequence";
 import debug from "gulp-debug";
+import clean from "gulp-clean";
+import polybuild from "polybuild";
+import shell from "gulp-shell";
 
 const tsProject = ts.createProject('tsconfig.json');
 
@@ -53,11 +56,35 @@ gulp.task('jade', () =>
     .pipe(gulp.dest('output/frontend'))
 );
 
+gulp.task('polybuild', () =>
+  gulp.src(['output/frontend/index.html'])
+    .pipe(polybuild({maximumCrush: true, suffix: ''}))
+    .pipe(gulp.dest('output/frontend/'))
+);
+
+gulp.task('clean-output', () =>
+  gulp.src(['output/frontend/css', 'output/frontend/js', 'output/frontend/rf-*.html'])
+    .pipe(clean())
+);
+
+gulp.task('firebase-deploy', shell.task([
+  'firebase deploy'
+]))
+
 gulp.task('build', function(done) {
   runSequence('tslint',
-              ['jade', 'less'],
+              'less',
+              'jade',
               'backend-ts',
               'frontend-ts',
+              done);
+});
+
+gulp.task('deploy', function(done) {
+  runSequence('build',
+              'polybuild',
+              'clean-output',
+              'firebase-deploy',
               done);
 });
 

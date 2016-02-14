@@ -5,8 +5,10 @@ link(rel="import" href="bower_components/paper-dialog/paper-dialog.html")
 link(rel="import" href="bower_components/paper-button/paper-button.html")
 
 dom-module#rf-login
-  link(rel="import" type="css" href="css/rf-login.css")
   template
+    style
+      include ../../../output/frontend/css/rf-login.css
+
     paper-icon-button#button(icon="icons:account-circle")
     span [[auth.google.displayName]]
 
