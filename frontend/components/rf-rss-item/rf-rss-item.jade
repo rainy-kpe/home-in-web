@@ -13,7 +13,9 @@ dom-module#rf-rss-item
       div.text
         a(class$="[[entry.status]]" target="_blank" href="[[entry.link]]") [[entry.title]]
         span.time [[_formatDate(entry.publishedDate)]]
-        div.snippet [[_formatSnippet(entry.contentSnippet)]]
+        div.snippet
+          a(hidden$="[[!pageLink]]" target="_blank" href="[[pageLink]]") [[_formatSnippet(entry.contentSnippet)]]
+          span(hidden$="[[pageLink]]") [[_formatSnippet(entry.contentSnippet)]]
           paper-tooltip [[entry.content]]
 
 script(type="text/javascript" src="js/rf-rss-item.js")

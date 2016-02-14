@@ -4,13 +4,19 @@
 /**
  * Card area web component
  *
+ * The container for the feed cards
  */
 @component("rf-card-area")
 class RFCardArea extends polymer.Base {
 
+    // The feeds that are shown in the cards
     @property({type: Array})
     feeds: any;
 
+    /**
+     * Defineds the shown feeds. This is temporary.
+     * @returns void
+     */
     attached(): void {
         this.set("feeds", [{
                 id: "reddit",

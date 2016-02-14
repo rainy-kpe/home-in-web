@@ -4,14 +4,46 @@
 /**
  * Card web component
  *
+ * A container for the feed and title.
  */
 @component("rf-card")
 class RFCard extends polymer.Base {
 
+    // The feed information
     @property({type: Object})
     feed: any;
 
-    _HSVtoRGB(h: number, s: number, v: number): any {
+    // Flag to show only the starred items
+    @property({type: Boolean, value: false})
+    showStarred: boolean;
+
+    /**
+     * Registers the button handler
+     * @returns void
+     */
+    attached(): void {
+        this.$.showStarred.addEventListener("tap", () => {
+            this.set("showStarred", !this.showStarred);
+        });
+    }
+
+    /**
+     * Returns the name of the icon that is used in the star button
+     * @param  {boolean} showStarred A flag to show/hide the starred items
+     * @returns string The name of the icon in the button
+     */
+    _getShowStarredIcon(showStarred: boolean): string {
+        return showStarred ? "icons:star" : "icons:star-border";
+    }
+
+    /**
+     * Converts the HSV color to RGB
+     * @param  {number} h Hue
+     * @param  {number} s Saturation
+     * @param  {number} v Value
+     * @returns number Array of [R, G, B]
+     */
+    _HSVtoRGB(h: number, s: number, v: number): number[] {
         let r: number, g: number, b: number, i: number, f: number, p: number, q: number, t: number;
         i = Math.floor(h * 6);
         f = h * 6 - i;
@@ -29,6 +61,11 @@ class RFCard extends polymer.Base {
         return [ Math.round(r * 255), Math.round(g * 255), Math.round(b * 255) ];
     }
 
+    /**
+     * Calculates a color for the given string
+     * @param  {string} s The string
+     * @returns string The color as a comma separated string
+     */
     _generateColor(s: string): string {
         const val: any = s.split("").reduce((a: any, b: any) => {
             a = ((a << 5) - a) + b.charCodeAt(0);

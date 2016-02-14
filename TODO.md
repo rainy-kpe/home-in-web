@@ -10,9 +10,12 @@
 * Add new feeds from the website
 * Store selected feeds to database
 * Show only starred items (toggle button)
+* Vulcanize for production
 
 # Bugs
 
 # Card types
 * Notes
 * Weather
+* HackerNews
+* Reddit

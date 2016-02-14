@@ -9,9 +9,14 @@
 @component("rf-app")
 class RFApp extends polymer.Base {
 
-    @property({type: String, value: false})
-    showBackground: string;
+    // Flag to show the background without blur and feed cards
+    @property({type: Boolean, value: false})
+    showBackground: boolean;
 
+    /**
+     * Registers the button handlers
+     * @returns void
+     */
     attached(): void {
         this.$.settingsButton.addEventListener("tap", () => {
             this.$.settingsDialog.toggle();

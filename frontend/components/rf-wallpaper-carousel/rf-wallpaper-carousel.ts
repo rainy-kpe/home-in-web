@@ -5,36 +5,43 @@
  * Wallpaper Carousel web component
  *
  * Downloads a new wallpaper from selected locations and sets it as a background.
- *
- * @property {Object} feed The downloaded rss image feed
- * @property {String} imgUrl The image url
- * @property {String} source The image source: "thepaperwall", "bing"
- * @property {String} sourceFeed The source feed url
  */
 @component("rf-wallpaper-carousel")
 class RFWallpaperCarousel extends polymer.Base {
 
+    // The feed contents
     @property({type: Object})
     feed: any;
 
+    // The url for the background image
     @property({type: String})
     imgUrl: String;
 
+    // The wallpaper provider
     @property({type: String})
     source: String;
 
+    // The source feed url
     @property({type: String, computed: "_computeSourceFeed(source)"})
     sourceFeed: String;
 
+    // A flag which causes the background to be blurred
     @property({type: Object, value: true})
     blurImage: boolean;
 
+    /**
+     * Returns the class name for the background.
+     * @param  {boolean} blur Set to true if the background is blurred
+     * @returns string The class name
+     */
     _getClass(blur: boolean): string {
         return blur ? "blur" : "";
     }
 
     /**
      * Returns the sourceFeed for the given source
+     * @param  {string} source The selected wallpaper source
+     * @returns string The rss feed url for the source
      */
     _computeSourceFeed(source: string): string {
         if (source === "thepaperwall") {
@@ -49,6 +56,9 @@ class RFWallpaperCarousel extends polymer.Base {
 
     /**
      * Observer for the feed changes. Parses the image (imgUrl) from the feed.
+     * @param  {any} newVal The new value for the "feed"
+     * @param  {any} oldVal The old value for the "feed"
+     * @returns void
      */
     @observe("feed")
     _feedChanged(newVal: any, oldVal: any): void {
@@ -66,6 +76,8 @@ class RFWallpaperCarousel extends polymer.Base {
 
     /**
      * Parses the image url from the paper wall feed.
+     * @param {string} content The feed content
+     * @returns void
      */
     _parseThePaperWall(content: string): void {
         const regExp: RegExp = /<img src="(.+?)\?/g;
@@ -78,6 +90,8 @@ class RFWallpaperCarousel extends polymer.Base {
 
     /**
      * Parses the image url from the bing feed.
+     * @param {string} content The feed content
+     * @returns void
      */
     _parseBing(content: string): void {
         const regExp: RegExp = /src="(.+?)"/g;

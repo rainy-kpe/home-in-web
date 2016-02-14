@@ -1,12 +1,16 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
-link(rel="import" href="bower_components/paper-card/paper-card.html")
+link(rel="import" href="bower_components/paper-header-panel/paper-header-panel.html")
 link(rel="import" href="rf-rss-feed.html")
 
 dom-module#rf-card
   link(rel="import" type="css" href="css/rf-card.css")
   template
-    paper-card(heading="[[feed.title]]" style$='background-color: rgba([[_generateColor(feed.title)]], 0.5);')
-      div.card-content
-        rf-rss-feed(feed="[[feed]]")
+    div(style$="background-color: rgba([[_generateColor(feed.title)]], 0.5)")
+      paper-header-panel
+        div.paper-header
+          div.text [[feed.title]]
+          paper-icon-button#showStarred(hidden$="[[!auth]]" icon="[[_getShowStarredIcon(showStarred)]]")
+      div.content
+        rf-rss-feed(feed="[[feed]]" auth="{{auth}}" show-starred="[[showStarred]]")
 
 script(type="text/javascript" src="js/rf-card.js")
