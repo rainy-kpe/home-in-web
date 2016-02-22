@@ -13,57 +13,53 @@ class RFCardArea extends polymer.Base {
     @property({type: Array})
     feeds: any;
 
+    // The firebase authentication data
+    @property({type: Object})
+    auth: FirebaseAuthData;
+
+    // The firebase instance
+    _firebase: Firebase = new Firebase('https://sweltering-fire-9601.firebaseio.com/feeds');
+
+    // The read settings callback
+    _authCallBack: any;
+
     /**
-     * Defineds the shown feeds. This is temporary.
+     * Register the firebase login callback
      * @returns void
      */
     attached(): void {
-        this.set("feeds", [{
-                id: "reddit",
-                title: "Reddit",
-                urls: ["http://www.reddit.com/.rss"]
-            }, {
-                id: "hackernews",
-                title: "HackerNews",
-                urls: ["https://news.ycombinator.com/rss"]
-            }, {
-                id: "rainlendar",
-                title: "Rainlendar",
-                urls: ["http://www.rainlendar.net/cms/index.php?option=com_kunena&Itemid=42&func=fb_rss&no_html=1"]
-            }, {
-                id: "tivi",
-                title: "TiVi",
-                urls: ["http://www.tivi.fi/rss.xml"]
-            }, {
-                id: "aamulehti",
-                title: "Aamulehti",
-                urls: ["http://www.aamulehti.fi/cs/Satellite?c=AMChannelFeed_C&cid=1194596264225&p=1194596117294&" +
-                "pagename=KAL_newssite%2FAMChannelFeed_C%2FAMArticleFeedIngressRSS20"]
-            }, {
-                id: "iltalehti",
-                title: "Iltalehti",
-                urls: ["http://www.iltalehti.fi/osastot/rss2-osastot-short20_os.xml"]
-            }, {
-                id: "afterdawn",
-                title: "Afterdawn",
-                urls: ["http://feeds.afterdawn.com/afterdawn_uutiset"]
-            }, {
-                id: "twit",
-                title: "Twit.tv",
-                urls: ["http://feeds.twit.tv/aaa_video_hd.xml",
-                       "http://feeds.twit.tv/ww_video_hd.xml",
-                       "http://feeds.twit.tv/mbw_video_hd.xml",
-                       "http://feeds.twit.tv/tnss_video_hd.xml"]
-            }, {
-                id: "blogs",
-                title: "Dev Blogs",
-                urls: ["http://blog.polymer-project.org/feed.xml",
-                       "https://blogs.msdn.microsoft.com/typescript/feed/",
-                       "http://feeds.feedburner.com/TheJavascriptPlayground",
-                       "https://javascriptweblog.wordpress.com/feed/",
-                       "http://feeds.feedburner.com/2ality"]
+        this._firebase.onAuth((authData: FirebaseAuthData) => {
+            this.set("auth", authData);
+        });
+    }
+
+    /**
+     * Observes the firebase auth changes. Reads the feeds from the database when
+     * the user signs in.
+     * @param  {any} newVal The new value
+     * @param  {any} oldVal The old value
+     * @returns void
+     */
+    @observe("auth")
+    _authChanged(newVal: any, oldVal: any): void {
+        if (newVal) {
+            this._authCallBack = this._firebase.child(newVal.uid).on("value", (snapshot: FirebaseDataSnapshot) => {
+                if (snapshot.val()) {
+                    const feeds: any[] = _.values(snapshot.val())
+                                          .map((item: any) => item.settings)
+                                          .sort((a: any, b: any) => a.order - b.order);
+                    this.set("feeds", feeds);
+                }
+            }, (error: any) => {
+                console.log("Reading the feeds from database failed: " + error.code);
+            });
+        } else {
+            // Clear the feeds if the user signs out
+            this.set("feeds", undefined);
+            if (oldVal) {
+                this._firebase.child(oldVal.uid).off("value", this._authCallBack);
             }
-        ]);
+        }
     }
 }
 

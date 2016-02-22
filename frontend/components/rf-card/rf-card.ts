@@ -17,14 +17,106 @@ class RFCard extends polymer.Base {
     @property({type: Boolean, value: false})
     showStarred: boolean;
 
+    // Flag to show the settings
+    @property({type: Boolean, value: false})
+    showSettings: boolean;
+
+    // The firebase instance
+    _firebase: Firebase = new Firebase('https://sweltering-fire-9601.firebaseio.com/feeds');
+
+    // Token for the database save operation
+    _async: any;
+
+    // The firebase authenticate data
+    _auth: FirebaseAuthData;
+
     /**
-     * Registers the button handler
+     * Saves the feed to the database. The saving is done with 1 sec delay after
+     * the last change.
+     */
+    _saveToDatabase: any = () => {
+        console.log(`Going to save feed "${this.feed.id}" settings to database`);
+        if (this._async) {
+            this.cancelAsync(this._async);
+        }
+        this._async = this.async(() => {
+            this._async = undefined;
+
+            if (this._auth) {
+                console.log(`Saving feed "${this.feed.id}" settings to database`);
+                this._firebase.child(this._auth.uid).child(this.feed.id).child("settings")
+                    .set(this.feed, (error: any) => {
+                    if (error) {
+                        console.log('Writing the feed failed: ' + JSON.stringify(error));
+                    }
+                });
+            }
+        }, 1000);
+    };
+
+    /**
+     * Registers the handlers
      * @returns void
      */
     attached(): void {
         this.$.showStarred.addEventListener("tap", () => {
             this.set("showStarred", !this.showStarred);
         });
+        this.$.showSettings.addEventListener("tap", () => {
+            this.set("showSettings", !this.showSettings);
+        });
+
+        this._firebase.onAuth((authData: FirebaseAuthData) => {
+            this._auth = authData;
+        });
+
+        // Add handlers for the close buttons and input changes (triggers save to database)
+        this.async(() => {
+            _.map(Polymer.dom(this.root).querySelectorAll('.close'), (item: any) => {
+                item.addEventListener("tap", (e: any) => {
+                    const id: number = parseInt(item.id, 10);
+                    this.set("feed.urls", _.filter(this.feed.urls, (url: any, index: number) => index !== id));
+                });
+            });
+
+            _.map(Polymer.dom(this.root).querySelectorAll('.url'), (input: any) => {
+                input.addEventListener("input", this._saveToDatabase);
+            });
+        });
+
+        // Add event handler for the new url input. It adds a new url, copies the already entered
+        // content to it and moves the focus the the new input control. The event handlers are also
+        // added to the new input and button.
+        this.$.newUrl.addEventListener("input", () => {
+            this.set("feed.urls", _.concat(this.feed.urls, [this.$.newUrl.value]));
+            this.$.newUrl.value = "";
+
+            // The new controls are not added immediately so make this async
+            this.async(() => {
+                const lastItem: any = _.last(Polymer.dom(this.root).querySelectorAll('.url'));
+                if (lastItem) {
+                    lastItem.focus();
+                    lastItem.removeEventListener("input", this._saveToDatabase);
+                    lastItem.addEventListener("input", this._saveToDatabase);
+                }
+                const lastButton: any = _.last(Polymer.dom(this.root).querySelectorAll('.close'));
+                lastButton.addEventListener("tap", (e: any) => {
+                    const id: number = parseInt(lastButton.id, 10);
+                    this.set("feed.urls", _.filter(this.feed.urls, (url: any, index: number) => index !== id));
+                });
+            });
+        });
+    }
+
+    /**
+     * Observes changes in the feed. Saves the changes to database.
+     * @returns void
+     */
+    @observe("feed.*")
+    _feedChanged(): void {
+        if (this._saveToDatabase) {
+            this._saveToDatabase();
+        }
     }
 
     /**

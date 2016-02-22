@@ -181,8 +181,8 @@ class RFRssFeed extends polymer.Base {
 
                     this.set("entries", _.take(all, 20));
 
-                    // Update feeds every 60 minutes
-                    this.async(() => feed._fetchFeeds(), 60 * 60 * 1000);
+                    // Update feeds every 15 minutes per feed
+                    this.async(() => feed._fetchFeeds(), this.feed.urls.length * 15 * 60 * 1000);
                 }
             }));
         });

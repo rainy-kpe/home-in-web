@@ -1,5 +1,7 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/paper-header-panel/paper-header-panel.html")
+link(rel="import" href="bower_components/iron-label/iron-label.html")
+link(rel="import" href="bower_components/iron-input/iron-input.html")
 link(rel="import" href="rf-rss-feed.html")
 
 dom-module#rf-card
@@ -11,6 +13,17 @@ dom-module#rf-card
         div.paper-header
           div.text [[feed.title]]
           paper-icon-button#showStarred(hidden$="[[!auth]]" icon="[[_getShowStarredIcon(showStarred)]]")
+          paper-icon-button#showSettings(hidden$="[[!auth]]" icon="icons:settings")
+        div.paper-header#settings(hidden$="[[!showSettings]]")
+          div Name
+          input(is="iron-input" value="{{feed.title::input}}")
+          div Feeds
+          template(is="dom-repeat" items="[[feed.urls]]" as="url" index="index")
+            div
+              input.url(is="iron-input" value="{{url::input}}")
+              paper-icon-button.close(icon="icons:close" id$="[[index]]")
+          input#newUrl(is="iron-input" placeholder="Add new feed url")
+
       div.content
         rf-rss-feed(feed="[[feed]]" auth="{{auth}}" show-starred="[[showStarred]]")
 
