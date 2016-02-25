@@ -1,5 +1,7 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/paper-card/paper-card.html")
+link(rel="import" href="bower_components/paper-fab/paper-fab.html")
+link(rel="import" href="bower_components/iron-icons/iron-icons.html")
 link(rel="import" href="rf-card.html")
 
 dom-module#rf-card-area
@@ -10,5 +12,7 @@ dom-module#rf-card-area
     div.items
       template(is="dom-repeat" items="[[feeds]]" as="feed")
         rf-card.item(feed="[[feed]]")
+
+    paper-fab#newFeed(icon="icons:add")
 
 script(type="text/javascript" src="js/rf-card-area.js")

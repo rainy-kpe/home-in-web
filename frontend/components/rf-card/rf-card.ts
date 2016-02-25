@@ -11,7 +11,7 @@ class RFCard extends polymer.Base {
 
     // The feed information
     @property({type: Object})
-    feed: any;
+    feed: Feed;
 
     // Flag to show only the starred items
     @property({type: Boolean, value: false})
@@ -62,8 +62,18 @@ class RFCard extends polymer.Base {
         this.$.showStarred.addEventListener("tap", () => {
             this.set("showStarred", !this.showStarred);
         });
+
         this.$.showSettings.addEventListener("tap", () => {
             this.set("showSettings", !this.showSettings);
+        });
+
+        this.$.closeCard.addEventListener("tap", () => {
+            this.$.confirmation.toggle();
+        });
+
+        // Handle the delete button in the confirmation dialog
+        this.$.confirmButton.addEventListener("tap", () => {
+            this.fire("feed-deleted", this.feed);
         });
 
         this._firebase.onAuth((authData: FirebaseAuthData) => {
@@ -75,7 +85,7 @@ class RFCard extends polymer.Base {
             _.map(Polymer.dom(this.root).querySelectorAll('.close'), (item: any) => {
                 item.addEventListener("tap", (e: any) => {
                     const id: number = parseInt(item.id, 10);
-                    this.set("feed.urls", _.filter(this.feed.urls, (url: any, index: number) => index !== id));
+                    this.set("feed.urls", _.filter(this.feed.urls, (url: string, index: number) => index !== id));
                 });
             });
 
@@ -102,7 +112,7 @@ class RFCard extends polymer.Base {
                 const lastButton: any = _.last(Polymer.dom(this.root).querySelectorAll('.close'));
                 lastButton.addEventListener("tap", (e: any) => {
                     const id: number = parseInt(lastButton.id, 10);
-                    this.set("feed.urls", _.filter(this.feed.urls, (url: any, index: number) => index !== id));
+                    this.set("feed.urls", _.filter(this.feed.urls, (url: string, index: number) => index !== id));
                 });
             });
         });
@@ -159,10 +169,13 @@ class RFCard extends polymer.Base {
      * @returns string The color as a comma separated string
      */
     _generateColor(s: string): string {
-        const val: any = s.split("").reduce((a: any, b: any) => {
-            a = ((a << 5) - a) + b.charCodeAt(0);
-            return a & a;
-        }, 0);
+        let val: number = 0;
+        if (s) {
+            val = s.split("").reduce((a: any, b: any) => {
+                a = ((a << 5) - a) + b.charCodeAt(0);
+                return a & a;
+            }, 0);
+        }
 
         const [r, g, b]: number[] = this._HSVtoRGB((Math.abs(val) % 1000) / 1000, 1, 0.5);
         return `${r}, ${g}, ${b}`;

@@ -2,6 +2,7 @@ link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/paper-header-panel/paper-header-panel.html")
 link(rel="import" href="bower_components/iron-label/iron-label.html")
 link(rel="import" href="bower_components/iron-input/iron-input.html")
+link(rel="import" href="bower_components/iron-icons/iron-icons.html")
 link(rel="import" href="rf-rss-feed.html")
 
 dom-module#rf-card
@@ -14,6 +15,7 @@ dom-module#rf-card
           div.text [[feed.title]]
           paper-icon-button#showStarred(hidden$="[[!auth]]" icon="[[_getShowStarredIcon(showStarred)]]")
           paper-icon-button#showSettings(hidden$="[[!auth]]" icon="icons:settings")
+          paper-icon-button#closeCard(hidden$="[[!auth]]" icon="icons:close")
         div.paper-header#settings(hidden$="[[!showSettings]]")
           div Name
           input(is="iron-input" value="{{feed.title::input}}")
@@ -26,5 +28,12 @@ dom-module#rf-card
 
       div.content
         rf-rss-feed(feed="[[feed]]" auth="{{auth}}" show-starred="[[showStarred]]")
+
+    paper-dialog#confirmation
+      h2 Delete Card?
+      p Are you sure you want to delete the card "[[feed.title]]"?
+      div.buttons
+        paper-button(dialog-dismiss) No
+        paper-button#confirmButton(dialog-confirm) Delete
 
 script(type="text/javascript" src="js/rf-card.js")
