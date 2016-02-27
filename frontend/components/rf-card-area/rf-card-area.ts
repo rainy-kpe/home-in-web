@@ -57,7 +57,8 @@ class RFCardArea extends polymer.Base {
                 name: "",
                 urls: []
             };
-            this.set("feeds", _.concat(this.feeds, [newFeed]));
+
+            this.push("feeds", newFeed);
         });
     }
 

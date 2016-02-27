@@ -84,8 +84,7 @@ class RFCard extends polymer.Base {
         this.async(() => {
             _.map(Polymer.dom(this.root).querySelectorAll('.close'), (item: any) => {
                 item.addEventListener("tap", (e: any) => {
-                    const id: number = parseInt(item.id, 10);
-                    this.set("feed.urls", _.filter(this.feed.urls, (url: string, index: number) => index !== id));
+                    this.splice("feed.urls", parseInt(item.id, 10), 1);
                 });
             });
 
@@ -98,7 +97,7 @@ class RFCard extends polymer.Base {
         // content to it and moves the focus the the new input control. The event handlers are also
         // added to the new input and button.
         this.$.newUrl.addEventListener("input", () => {
-            this.set("feed.urls", _.concat(this.feed.urls, [this.$.newUrl.value]));
+            this.push("feed.urls", this.$.newUrl.value);
             this.$.newUrl.value = "";
 
             // The new controls are not added immediately so make this async
