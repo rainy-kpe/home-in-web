@@ -1,12 +1,12 @@
 .items {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px;
+  margin: 2em;
 
   & .item {
-    flex: 1 0 400px;
+    flex: 1 0 25em;
     box-sizing: border-box;
-    margin: 10px;
+    margin: 1em;
   }
 }
 
@@ -18,26 +18,26 @@ paper-fab {
   --paper-fab-background: #33C;
 }
 
-@media (min-width: 50em) {
+@media (min-width: 52em) {
   .items .item {
-    max-width: ~"calc(50% - 20px)";
+    max-width: ~"calc(50% - 2em)";
   }
 }
 
-@media (min-width: 75em) {
+@media (min-width: 79em) {
   .items .item {
-    max-width: ~"calc(33.33333% - 20px)";
+    max-width: ~"calc(33.33333% - 2em)";
   }
 }
 
-@media (min-width: 100em) {
+@media (min-width: 108em) {
   .items .item {
-    max-width: ~"calc(25% - 20px)";
+    max-width: ~"calc(25% - 2em)";
   }
 }
 
-@media (min-width: 125em) {
+@media (min-width: 135em) {
   .items .item {
-    max-width: ~"calc(20% - 20px)";
+    max-width: ~"calc(20% - 2em)";
   }
 }
