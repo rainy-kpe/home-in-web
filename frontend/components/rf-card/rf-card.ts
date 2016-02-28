@@ -51,7 +51,7 @@ class RFCard extends polymer.Base {
                     }
                 });
             }
-        }, 1000);
+        }, 5000);
     };
 
     /**

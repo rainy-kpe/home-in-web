@@ -15,5 +15,8 @@ interface Feed {
     name: string;
 
     // The feed urls
-    urls: Array<string>;
+    urls?: Array<string>;
+
+    // Marker for drag
+    dragging?: boolean;
 }

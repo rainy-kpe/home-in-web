@@ -88,6 +88,7 @@ gulp.task('default', ['build']);
 gulp.task('watch', ['build'], () => {
   gulp.watch(['backend/**/*.ts',
               'frontend/**/*.ts',
-              'frontend/templates/*.jade'],
+              'frontend/**/*.less',
+              'frontend/**/*.jade'],
              ['build'])
 });

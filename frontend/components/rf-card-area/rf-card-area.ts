@@ -23,6 +23,8 @@ class RFCardArea extends polymer.Base {
     // The read settings callback
     _authCallBack: any;
 
+    _draggedFeed: Feed;
+
     /**
      * Handler for the feed-deleted event.
      * Deletes the given feed. Also from database.
@@ -38,6 +40,44 @@ class RFCardArea extends polymer.Base {
                 console.log('Removing the feed failed: ' + JSON.stringify(error));
             }
         });
+    };
+
+    _feedSort: any = (a: Feed, b: Feed) => a.order - b.order;
+
+    _dragStartHandler: any = (e: any): void => {
+        this._draggedFeed = e.srcElement.feed;
+
+        const pos: number = _.findIndex(this.feeds, (feed: Feed) => feed.id === this._draggedFeed.id);
+        this.set("feeds." + pos + ".dragging", true);
+    };
+
+    _dragEnterHandler: any = (e: any): void => {
+        const isCard: boolean = (e.currentTarget instanceof RFCard);
+
+        if (isCard && e.currentTarget.feed !== this._draggedFeed) {
+            if (this._draggedFeed.order < e.currentTarget.feed.order) {
+                this._draggedFeed.order = e.currentTarget.feed.order + 1;
+            } else {
+                this._draggedFeed.order = e.currentTarget.feed.order - 1;
+            }
+            this.$.cards.render();
+        }
+    };
+
+    _dragEndHandler: any = (e: any): void => {
+
+        this.feeds.sort(this._feedSort).map((feed: Feed, index: number) => {
+            feed.order = index * 10;
+
+            // Update the database
+            this._firebase.child(this.auth.uid).child(feed.id).child("settings").update({ order: feed.order });
+        });
+
+        const pos: number = _.findIndex(this.feeds, (feed: Feed) => feed.id === this._draggedFeed.id);
+        this.set("feeds." + pos + ".dragging", false);
+
+        this._draggedFeed = undefined;
+
     };
 
     /**
@@ -62,6 +102,10 @@ class RFCardArea extends polymer.Base {
         });
     }
 
+    _getCardOpacity(dragging: boolean): string {
+        return dragging ? "0.4" : "1.0";
+    }
+
     /**
      * Observes the changes in the feed. Adds handlers for the feed card deletion.
      * @param  {Feed[]} newVal
@@ -76,8 +120,17 @@ class RFCardArea extends polymer.Base {
             items.map((item: any) => {
                 item.removeEventListener("feed-deleted", this._deleteEventHandler);
                 item.addEventListener("feed-deleted", this._deleteEventHandler);
+
+                item.removeEventListener("dragstart", this._dragStartHandler);
+                item.addEventListener("dragstart", this._dragStartHandler);
+
+                item.removeEventListener("dragenter", this._dragEnterHandler);
+                item.addEventListener("dragenter", this._dragEnterHandler);
+
+                item.removeEventListener("dragend", this._dragEndHandler);
+                item.addEventListener("dragend", this._dragEndHandler);
             });
-        });
+        }, 1000);
     }
 
     /**
@@ -93,8 +146,7 @@ class RFCardArea extends polymer.Base {
             this._authCallBack = this._firebase.child(newVal.uid).on("value", (snapshot: FirebaseDataSnapshot) => {
                 if (snapshot.val()) {
                     const feeds: Feed[] = _.values(snapshot.val())
-                                          .map((item: any) => item.settings)
-                                          .sort((a: Feed, b: Feed) => a.order - b.order);
+                                          .map((item: any) => item.settings);
                     this.set("feeds", feeds);
                 }
             }, (error: any) => {
