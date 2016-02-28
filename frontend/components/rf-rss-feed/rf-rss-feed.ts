@@ -28,7 +28,7 @@ class RFRssFeed extends polymer.Base {
     showStarred: boolean;
 
     // The firebase instance
-    _firebase: Firebase = new Firebase('https://sweltering-fire-9601.firebaseio.com/feeds');
+    _firebase: Firebase = new Firebase('https://rainfeeds-dev.firebaseio.com/feeds');
 
     // The full feed entries
     _normalEntries: any;

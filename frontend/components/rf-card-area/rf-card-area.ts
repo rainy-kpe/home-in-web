@@ -18,7 +18,7 @@ class RFCardArea extends polymer.Base {
     auth: FirebaseAuthData;
 
     // The firebase instance
-    _firebase: Firebase = new Firebase('https://sweltering-fire-9601.firebaseio.com/feeds');
+    _firebase: Firebase = new Firebase('https://rainfeeds-dev.firebaseio.com/feeds');
 
     // The read settings callback
     _authCallBack: any;
@@ -91,14 +91,18 @@ class RFCardArea extends polymer.Base {
 
         this.$.newFeed.addEventListener("tap", () => {
             const newFeed: Feed = {
-                order: this.feeds.length + 1,
+                order: this.feeds ? (this.feeds.length + 1) : 0,
                 id: this._guid(),
                 type: "rss",
                 name: "",
                 urls: []
             };
 
-            this.push("feeds", newFeed);
+            if (this.feeds) {
+                this.push("feeds", newFeed);
+            } else {
+                this.set("feeds", [newFeed]);
+            }
         });
     }
 

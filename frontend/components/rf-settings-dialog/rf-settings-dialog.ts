@@ -21,7 +21,7 @@ class RFSettingsDialog extends polymer.Base {
     _authCallBack: any;
 
     // The firebase instance
-    _firebase: Firebase = new Firebase('https://sweltering-fire-9601.firebaseio.com/settings');
+    _firebase: Firebase = new Firebase('https://rainfeeds-dev.firebaseio.com/settings');
 
     /**
      * Toggles the settings dialog visibility

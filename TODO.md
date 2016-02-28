@@ -8,6 +8,8 @@
 * Reorder cards
 
 # Bugs
+* Adding new url doesn't load it immediately
+* Removing star in show starred does not remove it in normal view
 
 # Card types
 * Notes

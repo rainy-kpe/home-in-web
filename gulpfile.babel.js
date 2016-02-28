@@ -11,6 +11,7 @@ import debug from "gulp-debug";
 import clean from "gulp-clean";
 import polybuild from "polybuild";
 import shell from "gulp-shell";
+import replace from "gulp-replace";
 
 const tsProject = ts.createProject('tsconfig.json');
 
@@ -62,6 +63,12 @@ gulp.task('clean-output', () =>
     .pipe(clean())
 );
 
+gulp.task('replace-dev', function(){
+  gulp.src(['output/frontend/index.html'])
+    .pipe(replace('rainfeeds-dev', 'sweltering-fire-9601'))
+    .pipe(gulp.dest('output/frontend/index.html'));
+});
+
 gulp.task('firebase-deploy', shell.task([
   'firebase deploy'
 ]))
@@ -79,6 +86,7 @@ gulp.task('deploy', function(done) {
   runSequence('build',
               'polybuild',
               'clean-output',
+              'replace-dev',
               'firebase-deploy',
               done);
 });

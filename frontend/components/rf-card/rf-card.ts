@@ -22,7 +22,7 @@ class RFCard extends polymer.Base {
     showSettings: boolean;
 
     // The firebase instance
-    _firebase: Firebase = new Firebase('https://sweltering-fire-9601.firebaseio.com/feeds');
+    _firebase: Firebase = new Firebase('https://rainfeeds-dev.firebaseio.com/feeds');
 
     // Token for the database save operation
     _async: any;
@@ -97,7 +97,11 @@ class RFCard extends polymer.Base {
         // content to it and moves the focus the the new input control. The event handlers are also
         // added to the new input and button.
         this.$.newUrl.addEventListener("input", () => {
-            this.push("feed.urls", this.$.newUrl.value);
+            if (this.feed.urls) {
+                this.push("feed.urls", this.$.newUrl.value);
+            } else {
+                this.set("feed.urls", [this.$.newUrl.value]);
+            }
             this.$.newUrl.value = "";
 
             // The new controls are not added immediately so make this async

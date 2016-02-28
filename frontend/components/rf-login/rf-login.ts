@@ -14,7 +14,7 @@ class RFLogin extends polymer.Base {
     auth: FirebaseAuthData;
 
     // The firebase instance
-    _firebase: Firebase = new Firebase('https://sweltering-fire-9601.firebaseio.com/uauth');
+    _firebase: Firebase = new Firebase('https://rainfeeds-dev.firebaseio.com/uauth');
 
     /**
      * Registers the handlers
