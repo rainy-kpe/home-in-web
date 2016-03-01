@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+}
+
+.current {
+  font-weight: bold;
+  margin: 3px 5px;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0px 5px;
+  align-items: center;
+
+  & .day {
+    font-size: 12px;
+  }
+}

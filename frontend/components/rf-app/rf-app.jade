@@ -7,6 +7,7 @@ link(rel="import" href="rf-wallpaper-carousel.html")
 link(rel="import" href="rf-settings-dialog.html")
 link(rel="import" href="rf-card-area.html")
 link(rel="import" href="rf-login.html")
+link(rel="import" href="rf-weather.html")
 
 dom-module#rf-app
   template
@@ -17,6 +18,7 @@ dom-module#rf-app
     paper-scroll-header-panel(fixed)
       paper-toolbar
         div.title Rainfeeds
+        rf-weather(location="[[location]]" hidden$="[[!location]]")
         rf-login
         paper-icon-button#bgButton(icon="icons:dashboard")
         paper-icon-button#settingsButton(icon="icons:settings-applications")
@@ -24,6 +26,6 @@ dom-module#rf-app
       div.content
         rf-card-area(hidden$="[[showBackground]]")
 
-    rf-settings-dialog#settingsDialog(source="{{source}}")
+    rf-settings-dialog#settingsDialog(source="{{source}}" location="{{location}}")
 
 script(type="text/javascript" src="js/rf-app.js")

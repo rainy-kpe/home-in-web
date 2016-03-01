@@ -20,3 +20,21 @@ interface Feed {
     // Marker for drag
     dragging?: boolean;
 }
+
+/**
+ * The weather object
+ */
+interface Weather {
+    current: {
+        temp: number;
+        text: string;
+        icon: string;
+    };
+    forecast: {
+        low: number;
+        high: number;
+        day: string;
+        text: string;
+        icon: string;
+    }[];
+}

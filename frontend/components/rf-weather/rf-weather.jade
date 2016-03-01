@@ -1,0 +1,31 @@
+link(rel="import" href="bower_components/polymer/polymer.html")
+link(rel="import" href="bower_components/paper-tooltip/paper-tooltip.html")
+link(rel="import" href="rf-weather-feed.html")
+
+dom-module#rf-weather
+  template
+    style
+      include ../../../output/frontend/css/rf-weather.css
+
+    rf-weather-feed(location="[[location]]" result="{{weather}}")
+
+    span.current
+      paper-tooltip [[forecast.text]]
+      | [[location]]
+      | &nbsp;
+      i(class$="wi [[weather.current.icon]]")
+      | &nbsp;
+      | [[weather.current.temp]]
+      i.wi.wi-celsius
+
+    template(is="dom-repeat" items="[[weather.forecast]]" as="forecast")
+      span.forecast
+        paper-tooltip [[forecast.text]]
+        div.day [[forecast.day]]
+        div
+          i(class$="wi [[forecast.icon]]")
+          i.wi.wi-direction-up [[forecast.high]]
+          | &nbsp;
+          i.wi.wi-direction-down [[forecast.low]]
+
+script(type="text/javascript" src="js/rf-weather.js")

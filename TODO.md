@@ -10,6 +10,7 @@
 # Bugs
 * Adding new url doesn't load it immediately
 * Removing star in show starred does not remove it in normal view
+* Add button shows event without auth
 
 # Card types
 * Notes

@@ -1,11 +1,14 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="bower_components/google-feeds/google-feeds.html")
 link(rel="import" href="rf-rss-item.html")
+link(rel="import" href="rf-weather-feed.html")
 
 dom-module#rf-rss-feed
   template
     style
       include ../../../output/frontend/css/rf-rss-feed.css
+
+    rf-weather-feed(location="Tampere")
 
     template(is="dom-repeat" items="[[feed.urls]]" as="url")
       google-feeds.feed(feed='[[url]]')
