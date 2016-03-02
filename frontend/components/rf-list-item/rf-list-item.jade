@@ -1,0 +1,23 @@
+link(rel="import" href="bower_components/polymer/polymer.html")
+link(rel="import" href="bower_components/paper-tooltip/paper-tooltip.html")
+
+dom-module#rf-list-item
+  template
+    style
+      include ../../../output/frontend/css/rf-list-item.css
+
+    div.container
+      div(class$="[[_getStarClass(item.starred)]]")
+        paper-icon-button#star(icon="icons:star" hidden$="[[!auth]]")
+      div.thumb(hidden$="[[!item.image]]")
+        a(target="_blank" href="[[item.imageLink]]")
+          img(src="[[item.image]]")
+      div.text
+        a(class$="[[newItem]]" target="_blank" href="[[item.titleLink]]") [[item.title]]
+        span.time [[_formatDate(item.date)]]
+        div.snippet
+          a(hidden$="[[!item.snippetLink]]" target="_blank" href="[[pageLink]]") [[_formatSnippet(item.snippet)]]
+          span(hidden$="[[item.snippetLink]]") [[_formatSnippet(item.snippet)]]
+          paper-tooltip [[item.description]]
+
+script(type="text/javascript" src="js/rf-list-item.js")

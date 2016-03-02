@@ -22,6 +22,21 @@ interface Feed {
 }
 
 /**
+ * The feed item object
+ */
+interface FeedItem {
+    image: string;
+    imageLink: string;
+    title: string;
+    titleLink: string;
+    snippet: string;
+    snippetLink: string;
+    description: string;
+    date: string;
+    starred: boolean;
+}
+
+/**
  * The weather object
  */
 interface Weather {

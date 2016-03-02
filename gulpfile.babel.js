@@ -64,9 +64,9 @@ gulp.task('clean-output', () =>
 );
 
 gulp.task('replace-dev', function(){
-  gulp.src(['output/frontend/index.html'])
+  gulp.src(['output/frontend/index.js'])
     .pipe(replace('rainfeeds-dev', 'sweltering-fire-9601'))
-    .pipe(gulp.dest('output/frontend/index.html'));
+    .pipe(gulp.dest('output/frontend/'));
 });
 
 gulp.task('firebase-deploy', shell.task([

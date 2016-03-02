@@ -84,6 +84,32 @@ class RFRssFeed extends polymer.Base {
     }
 
     /**
+     * Converts the rss feed entry to FeedItem
+     * @param  {any} entry
+     * @returns FeedItem
+     */
+    _createItem(entry: any): FeedItem {
+        // Check if the content has an image
+        const imgUrl: string[] = entry.content.match(/src=\"(http:\/\/.+?.jpg)/);
+        // Try to find a link for the image
+        const link: string[] = entry.content.match(/<span><a href=\"(.+?)\">\[link\]<\/a><\/span>/);
+        // Find any link in the content
+        const pageLink: string[] = entry.content.match(/<a href=\"(.+?)\">/);
+
+        return {
+            image: _.head(imgUrl) || "",
+            imageLink: _.head(link) || "",
+            title: entry.title,
+            titleLink: entry.link,
+            snippet: entry.contentSnippet,
+            snippetLink: _.head(pageLink) || "",
+            description: entry.content,
+            date: entry.publishedDate,
+            starred: entry.starred
+        };
+    }
+
+    /**
      * Observer for the "showStarred" property. Changes the entries between the normal feed and starred items.
      * @param  {boolean} newVal The new value
      * @param  {boolean} oldVal The old value
