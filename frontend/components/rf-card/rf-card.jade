@@ -3,7 +3,7 @@ link(rel="import" href="bower_components/paper-header-panel/paper-header-panel.h
 link(rel="import" href="bower_components/iron-label/iron-label.html")
 link(rel="import" href="bower_components/iron-input/iron-input.html")
 link(rel="import" href="bower_components/iron-icons/iron-icons.html")
-link(rel="import" href="rf-rss-feed.html")
+link(rel="import" href="rf-list.html")
 
 dom-module#rf-card
   template
@@ -27,7 +27,7 @@ dom-module#rf-card
           input#newUrl(is="iron-input" placeholder="Add new feed url")
 
       div.content
-        rf-rss-feed(feed="[[feed]]" auth="{{auth}}" show-starred="[[showStarred]]")
+        rf-list(feed="[[feed]]" auth="{{auth}}" show-starred="[[showStarred]]")
 
     paper-dialog#confirmation
       h2 Delete Card?

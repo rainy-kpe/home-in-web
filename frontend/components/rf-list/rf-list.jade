@@ -1,0 +1,20 @@
+link(rel="import" href="bower_components/polymer/polymer.html")
+link(rel="import" href="bower_components/google-feeds/google-feeds.html")
+link(rel="import" href="rf-list-item.html")
+link(rel="import" href="rf-rss-feed.html")
+
+dom-module#rf-list
+  template
+    style
+      include ../../../output/frontend/css/rf-list.css
+
+    rf-rss-feed(feed="[[feed]]" entries="{{entries}}")
+
+    div.item-list
+      ul
+        template(is="dom-repeat" items="[[entries]]" as="entry")
+          li
+            rf-list-item.item(item="[[entry]]" auth="[[auth]]")
+
+script(type="text/javascript" src="js/rf-list.js")
+
