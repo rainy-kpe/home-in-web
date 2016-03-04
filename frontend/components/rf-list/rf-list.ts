@@ -40,6 +40,16 @@ class RFList extends polymer.Base {
     _starCallback: any;
 
     /**
+     * Checks if the feed is given type
+     * @param  {string} feedType The feed's type
+     * @param  {string} type The type to check for
+     * @returns true, if the feed is given type
+     */
+    _isFeedType(feedType: string, type: string): boolean {
+        return type === feedType;
+    }
+
+    /**
      * Handler for the star-changed event.
      * Writes the starred entry to the database or removes it from there.
      * @param  {any} e The event

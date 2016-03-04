@@ -67,20 +67,11 @@ class RFWeatherFeed extends polymer.Base {
                 request.onload = () => { this._parseResult(JSON.parse(request.responseText)); };
                 request.open("get", url, true);
                 request.send();
+
+                this.async(() => this._fetch(), 60 * 60 * 1000);
             }
         }, 1000);
     };
-
-    /**
-     * Registers the handlers
-     * @returns void
-     */
-    attached(): void {
-
-        // Update feed every hour
-        this.async(() => this._fetch(), 60 * 60 * 1000);
-    }
-
 }
 
 RFWeatherFeed.register();
