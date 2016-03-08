@@ -53,24 +53,21 @@ class RFWeatherFeed extends polymer.Base {
     _fetch(): void {
         if (this._async) {
             this.cancelAsync(this._async);
-        }
-        this._async = this.async(() => {
             this._async = undefined;
+        }
+        if (this.location) {
+            // console.log(`Reading weather feed for ${this.location}`);
+            const url: string = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' +
+                                'select * from weather.forecast where woeid in (select woeid from ' +
+                                'geo.places(1) where text="' + _.escape(this.location) + '") and u="c"';
 
-            if (this.location) {
-                // console.log(`Reading weather feed for ${this.location}`);
-                const url: string = 'https://query.yahooapis.com/v1/public/yql?format=json&q=' +
-                                    'select * from weather.forecast where woeid in (select woeid from ' +
-                                    'geo.places(1) where text="' + _.escape(this.location) + '") and u="c"';
+            const request: any = new XMLHttpRequest();
+            request.onload = () => { this._parseResult(JSON.parse(request.responseText)); };
+            request.open("get", url, true);
+            request.send();
 
-                const request: any = new XMLHttpRequest();
-                request.onload = () => { this._parseResult(JSON.parse(request.responseText)); };
-                request.open("get", url, true);
-                request.send();
-
-                this.async(() => this._fetch(), 60 * 60 * 1000);
-            }
-        }, 1000);
+            this._async = this.async(() => this._fetch(), 60 * 60 * 1000);
+        }
     };
 }
 

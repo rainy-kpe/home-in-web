@@ -130,6 +130,10 @@ class RFCard extends polymer.Base {
         if (this._saveToDatabase) {
             this._saveToDatabase();
         }
+
+        if (!this.feed.name) {
+            this.set("showSettings", true);
+        }
     }
 
     /**

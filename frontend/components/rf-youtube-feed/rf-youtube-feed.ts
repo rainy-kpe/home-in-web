@@ -75,18 +75,20 @@ class RFYoutubeFeed extends polymer.Base {
      * Downloads the playlists from Youtube
      */
     _downloadFeeds: any = () => {
-        this.feed.urls.map((url: string) => {
-            const request: any = new XMLHttpRequest();
-            request.onload = () => { this._parseResult(JSON.parse(request.responseText)); };
-            request.open("get", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=" +
-                url + "&key=AIzaSyBBV9COeQ8HNU06pXCHToJEcPXagLlqc2o", true);
-            request.send();
-        });
+        if (this.feed.urls) {
+            this.feed.urls.map((url: string) => {
+                const request: any = new XMLHttpRequest();
+                request.onload = () => { this._parseResult(JSON.parse(request.responseText)); };
+                request.open("get", "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=" +
+                    url + "&key=AIzaSyBBV9COeQ8HNU06pXCHToJEcPXagLlqc2o", true);
+                request.send();
+            });
 
-        if (this._async) {
-            this.cancelAsync(this._async);
+            if (this._async) {
+                this.cancelAsync(this._async);
+            }
+            this._async = this.async(this._downloadFeeds, 2 * 60 * 60 * 1000);
         }
-        this._async = this.async(this._downloadFeeds, 2 * 60 * 60 * 1000);
     };
 }
 

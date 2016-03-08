@@ -32,7 +32,7 @@ class RFCardArea extends polymer.Base {
      * @returns void
      */
     _deleteEventHandler: any = (e: any): void => {
-        console.log(`Deleting the feed "${e.detail.title}"`);
+        console.log(`Deleting the feed "${e.detail.name}"`);
         this.set("feeds", _.filter(this.feeds, (feed: Feed) => feed.id !== e.detail.id));
 
         this._firebase.child(this.auth.uid).child(e.detail.id).remove((error: any) => {
@@ -89,20 +89,36 @@ class RFCardArea extends polymer.Base {
             this.set("auth", authData);
         });
 
-        this.$.newFeed.addEventListener("tap", () => {
-            const newFeed: Feed = {
-                order: this.feeds ? (this.feeds.length + 1) : 0,
-                id: this._guid(),
-                type: "rss",
-                name: "",
-                urls: []
-            };
+        _.map(Polymer.dom(this.root).querySelectorAll('.newCard'), (item: any) => {
+            item.addEventListener("tap", (e: any) => {
+                const newFeed: Feed = {
+                    order: this.feeds ? (this.feeds.length + 1) : 0,
+                    id: this._guid(),
+                    type: e.srcElement.attributes["card-type"].value,
+                    name: "",
+                    urls: []
+                };
 
-            if (this.feeds) {
-                this.push("feeds", newFeed);
-            } else {
-                this.set("feeds", [newFeed]);
-            }
+                if (this.feeds) {
+                    this.push("feeds", newFeed);
+                } else {
+                    this.set("feeds", [newFeed]);
+                }
+
+                // Save to database
+                this._firebase.child(this.auth.uid).child(newFeed.id).child("settings")
+                    .set(newFeed, (error: any) => {
+                    if (error) {
+                        console.log('Writing the feed failed: ' + JSON.stringify(error));
+                    }
+                });
+
+                this.$.cardChoice.toggle();
+            });
+        });
+
+        this.$.newFeed.addEventListener("tap", () => {
+            this.$.cardChoice.toggle();
         });
     }
 

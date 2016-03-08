@@ -9,16 +9,16 @@ dom-module#rf-card
   template
     style
       include ../../../output/frontend/css/rf-card.css
-    div(style$="background-color: rgba([[_generateColor(feed.title)]], 0.5)")
+    div(style$="background-color: rgba([[_generateColor(feed.name)]], 0.5)")
       paper-header-panel
         div.paper-header
-          div.text [[feed.title]]
+          div.text [[feed.name]]
           paper-icon-button#showStarred(hidden$="[[!auth]]" icon="[[_getShowStarredIcon(showStarred)]]")
           paper-icon-button#showSettings(hidden$="[[!auth]]" icon="icons:settings")
           paper-icon-button#closeCard(hidden$="[[!auth]]" icon="icons:close")
         div.paper-header#settings(hidden$="[[!showSettings]]")
           div Name
-          input(is="iron-input" value="{{feed.title::input}}")
+          input(is="iron-input" value="{{feed.name::input}}")
           div Feeds
           template(is="dom-repeat" items="[[feed.urls]]" as="url" index="index")
             div
@@ -31,7 +31,7 @@ dom-module#rf-card
 
     paper-dialog#confirmation
       h2 Delete Card?
-      p Are you sure you want to delete the card "[[feed.title]]"?
+      p Are you sure you want to delete the card "[[feed.name]]"?
       div.buttons
         paper-button(dialog-dismiss) No
         paper-button#confirmButton(dialog-confirm) Delete
