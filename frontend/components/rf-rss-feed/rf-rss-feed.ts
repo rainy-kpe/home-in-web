@@ -31,12 +31,12 @@ class RFRssFeed extends polymer.Base {
         const pageLink: string[] = entry.content.match(/<a href=\"(.+?)\">/);
 
         return {
-            image: _.head(imgUrl) || "",
-            imageLink: _.head(link) || "",
+            image: imgUrl && imgUrl.length > 1 ? imgUrl[1] : "",
+            imageLink: link && link.length > 1 ? link[1] : "",
             title: entry.title,
             titleLink: entry.link,
             snippet: entry.contentSnippet,
-            snippetLink: _.head(pageLink) || "",
+            snippetLink: pageLink && pageLink.length > 1 ? pageLink[1] : undefined,
             description: entry.content,
             date: entry.publishedDate,
             starred: entry.starred
