@@ -2,6 +2,7 @@ link(rel="import" href="bower_components/polymer/polymer.html")
 link(rel="import" href="rf-list-item.html")
 link(rel="import" href="rf-rss-feed.html")
 link(rel="import" href="rf-youtube-feed.html")
+link(rel="import" href="rf-hackernews-feed.html")
 
 dom-module#rf-list
   template
@@ -12,6 +13,8 @@ dom-module#rf-list
       rf-rss-feed(feed="[[feed]]" entries="{{entries}}")
     template(is="dom-if" if="[[_isFeedType(feed.type, 'youtube')]]")
       rf-youtube-feed(feed="[[feed]]" entries="{{entries}}")
+    template(is="dom-if" if="[[_isFeedType(feed.type, 'hackernews')]]")
+      rf-hackernews-feed(feed="[[feed]]" entries="{{entries}}")
 
     div.item-list
       ul

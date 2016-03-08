@@ -34,6 +34,7 @@ interface FeedItem {
     description: string;
     date: string;
     starred: boolean;
+    score?: number;
 }
 
 /**

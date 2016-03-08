@@ -49,7 +49,7 @@ class RFListItem extends polymer.Base {
      * @returns string The human readable text for the date
      */
     _formatDate(date: string): string {
-        const d: Date = new Date(date);
+        const d: Date = new Date(<any> _.toNumber(date) || date);
         const diff: number = moment(d).diff(moment());
 
         this.set("newFlag", Math.abs(diff) < 60 * 60 * 1000 ? "new" : "");
