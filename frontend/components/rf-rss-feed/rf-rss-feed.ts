@@ -36,7 +36,7 @@ class RFRssFeed extends polymer.Base {
             title: entry.title,
             titleLink: entry.link,
             snippet: entry.contentSnippet,
-            snippetLink: pageLink && pageLink.length > 1 ? pageLink[1] : undefined,
+            snippetLink: pageLink && pageLink.length > 1 ? pageLink[1] : "",
             description: entry.content,
             date: entry.publishedDate,
             starred: entry.starred

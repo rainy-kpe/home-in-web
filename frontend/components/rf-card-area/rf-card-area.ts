@@ -163,7 +163,7 @@ class RFCardArea extends polymer.Base {
     @observe("auth")
     _authChanged(newVal: FirebaseAuthData, oldVal: FirebaseAuthData): void {
         if (newVal) {
-            this._authCallBack = this._firebase.child(newVal.uid).on("value", (snapshot: FirebaseDataSnapshot) => {
+            this._authCallBack = this._firebase.child(newVal.uid).once("value", (snapshot: FirebaseDataSnapshot) => {
                 if (snapshot.val()) {
                     const feeds: Feed[] = _.values(snapshot.val())
                                           .map((item: any) => item.settings);
@@ -175,9 +175,6 @@ class RFCardArea extends polymer.Base {
         } else {
             // Clear the feeds if the user signs out
             this.set("feeds", undefined);
-            if (oldVal) {
-                this._firebase.child(oldVal.uid).off("value", this._authCallBack);
-            }
         }
     }
 

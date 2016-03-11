@@ -49,11 +49,11 @@ class RFYoutubeFeed extends polymer.Base {
 
                 newItems.push({
                     image: image,
-                    imageLink: undefined,
+                    imageLink: "",
                     title: item.snippet.title,
                     titleLink: "https://www.youtube.com/watch?v=" + id,
                     snippet: item.snippet.description.substring(0, 100),
-                    snippetLink: undefined,
+                    snippetLink: "",
                     description: item.snippet.description,
                     date: date.toISOString(),
                     starred: false

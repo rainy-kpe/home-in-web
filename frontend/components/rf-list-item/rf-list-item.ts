@@ -66,6 +66,10 @@ class RFListItem extends polymer.Base {
         snippet = _.unescape(snippet);
         return snippet.replace('[link]', '').replace('[comments]', '');
     }
+
+    _showSnippetLink(snippetLink: string): boolean {
+        return snippetLink && snippetLink.length > 0 ? true : undefined;
+    }
 }
 
 RFListItem.register();

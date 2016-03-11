@@ -56,9 +56,9 @@ class RFList extends polymer.Base {
      * @returns void
      */
     _starEventHandler: any = (e: any): void => {
-        const key: string = sha256(e.detail.link);
+        const key: string = sha256(e.detail.titleLink);
 
-        console.log(`Changing the star value for "${e.detail.title}"`);
+        console.log(`Changing the star value for "${e.detail.title}" to ${e.detail.starred}`);
 
         if (e.detail.starred) {
             this._firebase.child(this.auth.uid).child(this.feed.id).child("starred").child(key)
@@ -83,7 +83,7 @@ class RFList extends polymer.Base {
     _starEntries(): void {
         if (this._starredEntries && this.entries) {
             this.entries.forEach((entry: any, index: number) => {
-                const key: string = sha256(entry.link);
+                const key: string = sha256(entry.titleLink);
                 if (this._starredEntries[key]) {
                     this.set("entries." + index + ".starred", true);
                 } else if (entry.starred) {

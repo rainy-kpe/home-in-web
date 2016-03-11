@@ -16,8 +16,8 @@ dom-module#rf-list-item
         a(class$="[[newItem]]" target="_blank" href="[[item.titleLink]]") [[item.title]]
         span.time [[_formatDate(item.date)]]
         div.snippet
-          a(hidden$="[[!item.snippetLink]]" target="_blank" href="[[item.snippetLink]]") [[_formatSnippet(item.snippet)]]
-          span(hidden$="[[item.snippetLink]]") [[_formatSnippet(item.snippet)]]
+          a(hidden$="[[!_showSnippetLink(item.snippetLink)]]" target="_blank" href="[[item.snippetLink]]") [[_formatSnippet(item.snippet)]]
+          span(hidden$="[[_showSnippetLink(item.snippetLink)]]") [[_formatSnippet(item.snippet)]]
           paper-tooltip [[item.description]]
 
 script(type="text/javascript" src="js/rf-list-item.js")
