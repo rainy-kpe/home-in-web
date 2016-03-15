@@ -1,7 +1,7 @@
 # rainfeeds
 Rainfeeds is a web browser start page which shows RSS feeds in a card layout. The stories can be starred to be viewed later.
 
-[[https://github.com/rainy-kpe/repository/blob/master/screenshot.png|alt=screenshot]]
+![screenshot](https://raw.githubusercontent.com/rainy-kpe/rainfeeds/master/screenshot.png)
 
 Example site can be found from http://rainfeeds.firebaseapp.com
 
