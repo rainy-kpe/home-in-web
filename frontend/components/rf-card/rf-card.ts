@@ -76,48 +76,12 @@ class RFCard extends polymer.Base {
             this.fire("feed-deleted", this.feed);
         });
 
+        this.$.rfSettings.addEventListener("settings-changed", () => {
+            this._saveToDatabase();
+        });
+
         this._firebase.onAuth((authData: FirebaseAuthData) => {
             this._auth = authData;
-        });
-
-        // Add handlers for the close buttons and input changes (triggers save to database)
-        this.async(() => {
-            _.map(Polymer.dom(this.root).querySelectorAll('.close'), (item: any) => {
-                item.addEventListener("tap", (e: any) => {
-                    this.splice("feed.urls", parseInt(item.id, 10), 1);
-                });
-            });
-
-            _.map(Polymer.dom(this.root).querySelectorAll('.url'), (input: any) => {
-                input.addEventListener("input", this._saveToDatabase);
-            });
-        });
-
-        // Add event handler for the new url input. It adds a new url, copies the already entered
-        // content to it and moves the focus the the new input control. The event handlers are also
-        // added to the new input and button.
-        this.$.newUrl.addEventListener("input", () => {
-            if (this.feed.urls) {
-                this.push("feed.urls", this.$.newUrl.value);
-            } else {
-                this.set("feed.urls", [this.$.newUrl.value]);
-            }
-            this.$.newUrl.value = "";
-
-            // The new controls are not added immediately so make this async
-            this.async(() => {
-                const lastItem: any = _.last(Polymer.dom(this.root).querySelectorAll('.url'));
-                if (lastItem) {
-                    lastItem.focus();
-                    lastItem.removeEventListener("input", this._saveToDatabase);
-                    lastItem.addEventListener("input", this._saveToDatabase);
-                }
-                const lastButton: any = _.last(Polymer.dom(this.root).querySelectorAll('.close'));
-                lastButton.addEventListener("tap", (e: any) => {
-                    const id: number = parseInt(lastButton.id, 10);
-                    this.set("feed.urls", _.filter(this.feed.urls, (url: string, index: number) => index !== id));
-                });
-            });
         });
     }
 

@@ -4,6 +4,7 @@ link(rel="import" href="bower_components/iron-label/iron-label.html")
 link(rel="import" href="bower_components/iron-input/iron-input.html")
 link(rel="import" href="bower_components/iron-icons/iron-icons.html")
 link(rel="import" href="rf-list.html")
+link(rel="import" href="rf-list-settings.html")
 
 dom-module#rf-card
   template
@@ -17,14 +18,7 @@ dom-module#rf-card
           paper-icon-button#showSettings(hidden$="[[!auth]]" icon="icons:settings")
           paper-icon-button#closeCard(hidden$="[[!auth]]" icon="icons:close")
         div.paper-header#settings(hidden$="[[!showSettings]]")
-          div Name
-          input(is="iron-input" value="{{feed.name::input}}")
-          div Feeds
-          template(is="dom-repeat" items="[[feed.urls]]" as="url" index="index")
-            div
-              input.url(is="iron-input" value="{{url::input}}")
-              paper-icon-button.close(icon="icons:close" id$="[[index]]")
-          input#newUrl(is="iron-input" placeholder="Add new feed url")
+          rf-list-settings#rfSettings(feed="{{feed}}")
 
       div.content
         rf-list(feed="[[feed]]" auth="{{auth}}" show-starred="[[showStarred]]")

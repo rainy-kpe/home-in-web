@@ -16,7 +16,7 @@ dom-module#rf-list
     template(is="dom-if" if="[[_isFeedType(feed.type, 'hackernews')]]")
       rf-hackernews-feed(feed="[[feed]]" entries="{{entries}}")
 
-    div.item-list
+    div.item-list.content
       ul
         template(is="dom-repeat" items="[[entries]]" as="entry")
           li

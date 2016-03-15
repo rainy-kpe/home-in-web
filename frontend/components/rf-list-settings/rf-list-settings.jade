@@ -1,0 +1,20 @@
+link(rel="import" href="bower_components/polymer/polymer.html")
+
+dom-module#rf-list-settings
+  template
+    style
+      include ../../../output/frontend/css/rf-list-settings.css
+
+    div#settings
+      div Name
+      input(is="iron-input" value="{{feed.name::input}}")
+      template(is="dom-if" if="[[!_isFeedType(feed.type, 'hackernews')]]")
+        div [[_getTitle(feed.type)]]
+        template(is="dom-repeat" items="[[feed.urls]]" as="url" index="index")
+          div
+            input.url(is="iron-input" value="{{url::input}}")
+            paper-icon-button.close(icon="icons:close" id$="[[index]]")
+        input#newUrl(is="iron-input" placeholder="[[_getPlaceholderText(feed.type)]]")
+
+script(type="text/javascript" src="js/rf-list-settings.js")
+

@@ -53,7 +53,7 @@ class RFRssFeed extends polymer.Base {
             // Add error handler for all the feeds
             const feeds: any[] = <any> Polymer.dom(this.root).querySelectorAll(".feed");
             feeds.map((feed: any) => feed.addEventListener("google-feeds-error", (e: any) => {
-                console.log("ERROR: " + JSON.stringify(e.status));
+                console.log("ERROR: " + JSON.stringify(e));
             }));
 
             // Add handler for the feed results
