@@ -41,8 +41,8 @@ class RFRssFeed extends polymer.Base {
         return {
             image: imgUrl && imgUrl.length > 1 ? imgUrl[1] : "",
             imageLink: link && link.length > 1 ? link[1] : "",
-            title: entry.title,
-            titleLink: entry.link.href,
+            title: entry.title.content ? entry.title.content : entry.title,
+            titleLink: Array.isArray(entry.link) ? entry.link[0].href : entry.link.href,
             snippet: content.replace(/(<([^>]+)>)/ig, "").slice(0, 200),
             snippetLink: pageLink && pageLink.length > 1 ? pageLink[1] : "",
             description: content,
