@@ -43,14 +43,18 @@ class RFWallpaperCarousel extends polymer.Base {
      * @param  {string} source The selected wallpaper source
      * @returns string The rss feed url for the source
      */
-    _computeSourceFeed(source: string): string {
+    _computeSourceFeed(source: string): any {
         if (source === "thepaperwall") {
-            return "http://thepaperwall.com/rss.day.php";
+            return {
+                urls: ["http://thepaperwall.com/rss.day.php"]
+            };
         } else if (source === "bing") {
-            return "http://www.bing.com/HPImageArchive.aspx?format=rss&idx=0&n=1";
+            return {
+                urls: ["http://www.bing.com/HPImageArchive.aspx?format=rss&idx=0&n=1"]
+            };
         } else {
             console.log("Unknown source: " + source);
-            return "";
+            return {};
         }
     }
 
@@ -62,11 +66,11 @@ class RFWallpaperCarousel extends polymer.Base {
      */
     @observe("feed")
     _feedChanged(newVal: any, oldVal: any): void {
-        if (newVal && newVal.entries.length > 0) {
+        if (newVal && newVal.length > 0) {
             if (this.source === "thepaperwall") {
-                this._parseThePaperWall(newVal.entries[0].content);
+                this._parseThePaperWall(newVal[0].description);
             } else if (this.source === "bing") {
-                this._parseBing(newVal.entries[0].content);
+                this._parseBing(newVal[0].description);
             }
 
             // Update feed every 2 hours

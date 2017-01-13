@@ -1,12 +1,12 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
-link(rel="import" href="bower_components/google-feeds/google-feeds.html")
+link(rel="import" href="rf-rss-feed.html")
 
 dom-module#rf-wallpaper-carousel
   template
     style
       include ../../../output/frontend/css/rf-wallpaper-carousel.css
 
-    google-feeds#feed(feed='[[sourceFeed]]' results='{{feed}}')
+    rf-rss-feed(feed='[[sourceFeed]]' entries='{{feed}}')
     div#bg(style$="background: url([[imgUrl]]) no-repeat center center fixed;" class$="[[_getClass(blurImage)]]")
 
 script(type="text/javascript" src="js/rf-wallpaper-carousel.js")

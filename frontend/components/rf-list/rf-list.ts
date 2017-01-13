@@ -27,6 +27,10 @@ class RFList extends polymer.Base {
     @property({type: Boolean, value: false})
     showStarred: boolean;
 
+    // Link to the site
+    @property({type: String, notify: true})
+    link: string;
+
     // The firebase instance
     _firebase: Firebase = new Firebase('https://rainfeeds-dev.firebaseio.com/feeds');
 

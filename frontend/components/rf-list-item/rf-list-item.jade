@@ -1,5 +1,4 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
-link(rel="import" href="bower_components/paper-tooltip/paper-tooltip.html")
 
 dom-module#rf-list-item
   template
@@ -18,6 +17,5 @@ dom-module#rf-list-item
         div.snippet
           a(hidden$="[[!_showSnippetLink(item.snippetLink)]]" target="_blank" href="[[item.snippetLink]]") [[_formatSnippet(item.snippet)]]
           span(hidden$="[[_showSnippetLink(item.snippetLink)]]") [[_formatSnippet(item.snippet)]]
-          paper-tooltip [[item.description]]
 
 script(type="text/javascript" src="js/rf-list-item.js")

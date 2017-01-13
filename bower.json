@@ -22,7 +22,10 @@
     "iron-input": "PolymerElements/iron-input#^1.0.8",
     "paper-fab": "PolymerElements/paper-fab#^1.2.0",
     "weather-icons": "^2.0.10",
-    "paper-material": "PolymerElements/paper-material#^1.0.6"
+    "paper-material": "PolymerElements/paper-material#^1.0.6",
+    "rss-reader": "polymer-rss#^0.1.0",
+    "iron-icons": "^1.2.0",
+    "rss-parser": "^2.5.2"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

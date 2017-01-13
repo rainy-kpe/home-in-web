@@ -10,11 +10,11 @@ dom-module#rf-list
       include ../../../output/frontend/css/rf-list.css
 
     template(is="dom-if" if="[[_isFeedType(feed.type, 'rss')]]")
-      rf-rss-feed(feed="[[feed]]" entries="{{entries}}")
+      rf-rss-feed(feed="[[feed]]" entries="{{entries}}" link="{{link}}")
     template(is="dom-if" if="[[_isFeedType(feed.type, 'youtube')]]")
       rf-youtube-feed(feed="[[feed]]" entries="{{entries}}")
     template(is="dom-if" if="[[_isFeedType(feed.type, 'hackernews')]]")
-      rf-hackernews-feed(feed="[[feed]]" entries="{{entries}}")
+      rf-hackernews-feed(feed="[[feed]]" entries="{{entries}}" link="{{link}}")
 
     div.item-list.content
       ul

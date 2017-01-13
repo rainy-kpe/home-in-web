@@ -17,6 +17,10 @@ class RFHackerNewsFeed extends polymer.Base {
     @property({type: Array, notify: true})
     entries: FeedItem[];
 
+    // Link to the site
+    @property({type: String, notify: true, value: "http://hckrnews.com/"})
+    link: string;
+
     // The firebase instance
     _firebase: Firebase = new Firebase('https://hacker-news.firebaseio.com/v0');
 
@@ -44,7 +48,7 @@ class RFHackerNewsFeed extends polymer.Base {
     };
 
     _storiesDownloaded: any = (snapshot: FirebaseDataSnapshot) => {
-        console.log("Downloaded top stories from Hacker News");
+        // console.log("Downloaded top stories from Hacker News");
 
         if (snapshot.val()) {
             // Remove all stories which are not in the top stories anymore

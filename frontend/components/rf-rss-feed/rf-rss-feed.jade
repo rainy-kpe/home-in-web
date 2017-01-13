@@ -1,9 +1,7 @@
 link(rel="import" href="bower_components/polymer/polymer.html")
-link(rel="import" href="bower_components/google-feeds/google-feeds.html")
+script(src="bower_components/rss-parser/dist/rss-parser.js")
 
 dom-module#rf-rss-feed
-  template
-    template(is="dom-repeat" items="[[feed.urls]]" as="url")
-      google-feeds.feed(feed='[[url]]')
 
 script(type="text/javascript" src="js/rf-rss-feed.js")
+

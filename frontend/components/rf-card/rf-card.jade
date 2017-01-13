@@ -13,7 +13,7 @@ dom-module#rf-card
     div(style$="background-color: rgba([[_generateColor(feed.name)]], 0.5)")
       paper-header-panel
         div.paper-header
-          div.text [[feed.name]]
+          a.text(target="_blank" href="[[feed.link]]") [[feed.name]]
           paper-icon-button#showStarred(hidden$="[[!auth]]" icon="[[_getShowStarredIcon(showStarred)]]")
           paper-icon-button#showSettings(hidden$="[[!auth]]" icon="icons:settings")
           paper-icon-button#closeCard(hidden$="[[!auth]]" icon="icons:close")
@@ -21,7 +21,7 @@ dom-module#rf-card
           rf-list-settings#rfSettings(feed="{{feed}}")
 
       div.content
-        rf-list(feed="[[feed]]" auth="{{auth}}" show-starred="[[showStarred]]")
+        rf-list(feed="[[feed]]" auth="{{auth}}" link="{{feed.link}}" show-starred="[[showStarred]]")
 
     paper-dialog#confirmation
       h2 Delete Card?

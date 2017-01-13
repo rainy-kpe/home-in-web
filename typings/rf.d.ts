@@ -14,6 +14,9 @@ interface Feed {
     // The name of the feed
     name: string;
 
+    // The link to the site
+    link?: string;
+
     // The feed urls
     urls?: Array<string>;
 
